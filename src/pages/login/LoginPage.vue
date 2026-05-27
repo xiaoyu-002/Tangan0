@@ -213,6 +213,13 @@ onBeforeUnmount(clearPendingTimers)
 
 <template>
   <div class="login-page">
+    <div class="login-bg-carousel" aria-hidden="true">
+      <span class="login-bg-slide login-bg-slide-1"></span>
+      <span class="login-bg-slide login-bg-slide-2"></span>
+      <span class="login-bg-slide login-bg-slide-3"></span>
+      <span class="login-bg-slide login-bg-slide-4"></span>
+    </div>
+    <div class="login-bg-overlay" aria-hidden="true"></div>
     <div class="login-glow login-glow-left"></div>
     <div class="login-glow login-glow-right"></div>
 
@@ -389,6 +396,65 @@ onBeforeUnmount(clearPendingTimers)
     #eef3ff;
   color: #0b1631;
   font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.login-bg-carousel,
+.login-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-bg-carousel {
+  overflow: hidden;
+  background: #eef3ff;
+}
+
+.login-bg-slide {
+  position: absolute;
+  inset: -2%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  animation: login-bg-crossfade 28s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.login-bg-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(238, 243, 255, 0.8) 0%, rgba(238, 243, 255, 0.48) 44%, rgba(238, 243, 255, 0.22) 100%);
+}
+
+.login-bg-slide-1 {
+  background-image: url('/assets/storyboards/7638139108254059789/shot_3_01-03dae8.jpg');
+  animation-delay: 0s;
+}
+
+.login-bg-slide-2 {
+  background-image: url('/assets/storyboards/7637993570737065247/shot_4_00-157b70.jpg');
+  animation-delay: 7s;
+}
+
+.login-bg-slide-3 {
+  background-image: url('/assets/storyboards/7638368345523326222/shot_3_00-113ab9.jpg');
+  animation-delay: 14s;
+}
+
+.login-bg-slide-4 {
+  background-image: url('/assets/storyboards/7638339931768638750/shot_5_00-25935f.jpg');
+  animation-delay: 21s;
+}
+
+.login-bg-overlay {
+  background:
+    radial-gradient(circle at 8% 16%, rgba(124, 58, 237, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 20%, rgba(76, 83, 245, 0.16), transparent 25%),
+    linear-gradient(135deg, rgba(245, 248, 255, 0.82) 0%, rgba(238, 243, 255, 0.68) 48%, rgba(229, 236, 255, 0.54) 100%);
+  backdrop-filter: blur(1px);
 }
 
 .login-page::before {
@@ -1160,6 +1226,31 @@ onBeforeUnmount(clearPendingTimers)
   margin: 0 auto 28px;
   color: #8a96ad;
   font-size: 12px;
+}
+
+@keyframes login-bg-crossfade {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  7% {
+    opacity: 1;
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  36% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
 }
 
 @keyframes grid-drift {
