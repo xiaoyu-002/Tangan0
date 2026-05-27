@@ -1,0 +1,2286 @@
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+[data-chart=chart-_r_2v_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_2v_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_30_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_30_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_3d_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_3d_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_3e_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_3e_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_3r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_3r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_3s_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_3s_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_49_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_49_] {
+  --color-slice-0: #7C5CFC;
+}
+
+[data-chart=chart-_r_4m_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_4m_] {
+  --color-slice-0: #7C5CFC;
+}
+
+[data-chart=chart-_r_53_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_53_] {
+  --color-slice-0: #7C5CFC;
+}
+
+[data-chart=chart-_r_5d_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_5d_] {
+  --color-slice-0: #7C5CFC;
+}
+
+[data-chart=chart-_r_5e_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+}
+
+
+.dark [data-chart=chart-_r_5e_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+}
+
+[data-chart=chart-_r_5r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_5r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_5s_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_5s_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_69_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_69_] {
+  --color-slice-0: #7C5CFC;
+}
+
+[data-chart=chart-_r_6m_] {
+  --color-slice-0: #7C5CFC;
+}
+
+
+.dark [data-chart=chart-_r_6m_] {
+  --color-slice-0: #7C5CFC;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+[data-chart=chart-_r_22_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_22_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_23_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_23_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_29_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_29_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_2a_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_2a_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_2g_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_2g_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_2h_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_2h_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_2n_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_2n_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_2o_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_2o_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_2u_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_2u_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_2v_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_2v_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_35_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_35_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_36_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_36_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_3c_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_3c_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_3d_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_3d_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_3j_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_3j_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_3k_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_3k_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_3q_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_3q_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_3r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_3r_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+[data-chart=chart-_r_41_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+
+.dark [data-chart=chart-_r_41_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+  --color-slice-5: #FBBF24;
+}
+
+[data-chart=chart-_r_42_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+
+.dark [data-chart=chart-_r_42_] {
+  --color-slice-0: #7C5CFC;
+  --color-slice-1: #06B6D4;
+  --color-slice-2: #F472B6;
+  --color-slice-3: #60A5FA;
+  --color-slice-4: #34D399;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color, #6366f1);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px var(--nprogress-color, #6366f1), 0 0 5px var(--nprogress-color, #6366f1);
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+    #nprogress .bar {
+      background: #8b5cf6;
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: 0 0 10px #8b5cf6, 0 0 5px #8b5cf6;
+    }
