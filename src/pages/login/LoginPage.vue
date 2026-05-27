@@ -234,10 +234,10 @@ onBeforeUnmount(clearPendingTimers)
       <section class="hero-panel" aria-label="产品介绍">
         <div class="hero-copy">
           <h1>
-            找爆品、做视频、
-            <span>冲销量</span>
+            智选
+            <span>只为你的成功。</span>
           </h1>
-          <p>你的 AI 跨境团队 —— 从洞察到变现</p>
+          <p>把机会、内容和增长放进同一个入口</p>
         </div>
 
         <div class="feature-grid">
@@ -262,7 +262,7 @@ onBeforeUnmount(clearPendingTimers)
         </div>
       </section>
 
-      <section class="login-card" :class="{ 'is-submitting': isSubmitting }" aria-label="登录">
+      <section class="login-card search-auth-card" :class="{ 'is-submitting': isSubmitting }" aria-label="登录">
         <div class="login-tabs" role="tablist" aria-label="登录方式">
           <button
             type="button"
@@ -1522,6 +1522,270 @@ onBeforeUnmount(clearPendingTimers)
   }
 }
 
+/* Search-style auth layout experiment */
+.login-page {
+  background: #101827;
+}
+
+.login-bg-slide::after {
+  background: linear-gradient(180deg, rgba(5, 10, 20, 0.18) 0%, rgba(5, 10, 20, 0.46) 58%, rgba(5, 10, 20, 0.7) 100%);
+}
+
+.login-bg-overlay {
+  background:
+    linear-gradient(180deg, rgba(8, 13, 28, 0.18) 0%, rgba(8, 13, 28, 0.08) 34%, rgba(8, 13, 28, 0.68) 100%),
+    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.16), transparent 34%);
+  backdrop-filter: none;
+}
+
+.login-page::before {
+  opacity: 0.12;
+}
+
+.login-page::after,
+.login-glow,
+.feature-grid,
+.assistant-tip,
+.status-message,
+.policy,
+.login-footer {
+  display: none;
+}
+
+.login-header {
+  width: min(1320px, calc(100% - 56px));
+  margin-top: 24px;
+}
+
+.brand {
+  color: #fff;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.login-shell {
+  width: min(1320px, calc(100% - 56px));
+  min-height: calc(100dvh - 92px);
+  grid-template-columns: 1fr;
+  align-items: end;
+  gap: 0;
+  padding: 0 0 54px;
+}
+
+.hero-panel {
+  max-width: none;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  transform: translateY(24px);
+}
+
+.hero-copy h1 {
+  max-width: none;
+  color: #fff;
+  font-size: 86px;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
+}
+
+.hero-copy h1 span {
+  display: block;
+  margin-top: 14px;
+  background: none;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 700;
+  text-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
+  animation: none;
+}
+
+.hero-copy p {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+}
+
+.search-auth-card {
+  align-self: end;
+  justify-self: center;
+  width: min(920px, 100%);
+  min-height: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+  display: grid;
+  grid-template-columns: 142px minmax(0, 1fr);
+  gap: 10px;
+  overflow: visible;
+}
+
+.search-auth-card::before,
+.search-auth-card::after {
+  display: none;
+}
+
+.search-auth-card:hover,
+.search-auth-card.is-submitting {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.32);
+}
+
+.search-auth-card .login-tabs {
+  align-self: center;
+  margin: 0;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.search-auth-card .login-tabs button {
+  height: 42px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.search-auth-card .login-tabs button.active {
+  background: #111827;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.2);
+}
+
+.search-auth-card .method-tabs {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 2px 0 -44px;
+}
+
+.search-auth-card .method-tabs button {
+  flex: 0 0 auto;
+  min-width: 96px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.search-auth-card .method-tabs button.active {
+  background: #fff;
+  color: #111827;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+.search-auth-card .auth-panel {
+  align-self: center;
+}
+
+.search-auth-card .qr-panel {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-auth-card .qr-frame {
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 4px;
+  border-radius: 999px;
+  animation: none;
+}
+
+.search-auth-card .qr-frame::before,
+.search-auth-card .qr-frame::after,
+.search-auth-card .qr-logo {
+  display: none;
+}
+
+.search-auth-card .qr-grid {
+  gap: 1px;
+  padding: 2px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.search-auth-card .scan-copy {
+  align-items: flex-start;
+  gap: 2px;
+  margin: 0;
+  min-width: 0;
+}
+
+.search-auth-card .scan-copy strong {
+  font-size: 14px;
+}
+
+.search-auth-card .scan-copy span {
+  max-width: 260px;
+  overflow: hidden;
+  color: #64748b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-auth-card .divider {
+  display: none;
+}
+
+.search-auth-card .login-method {
+  width: auto;
+  min-width: 128px;
+  height: 44px;
+  margin: 0;
+  border-radius: 999px;
+  background: #f8fafc;
+}
+
+.search-auth-card .auth-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  align-items: end;
+  gap: 8px;
+}
+
+.search-auth-card .field {
+  gap: 4px;
+}
+
+.search-auth-card .field span,
+.search-auth-card .policy-check,
+.search-auth-card .form-error {
+  display: none;
+}
+
+.search-auth-card .field input,
+.search-auth-card .code-row button,
+.search-auth-card .submit-button {
+  height: 46px;
+  border-radius: 999px;
+}
+
+.search-auth-card .code-row {
+  grid-template-columns: minmax(0, 1fr) 104px;
+  gap: 8px;
+}
+
+.search-auth-card .submit-button {
+  min-width: 172px;
+  margin: 0;
+  padding: 0 20px;
+  background: #111827;
+  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.24);
+  animation: none;
+}
+
+.search-auth-card .auth-form .field:nth-of-type(4) {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1530,6 +1794,49 @@ onBeforeUnmount(clearPendingTimers)
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .login-shell {
+    min-height: calc(100dvh - 84px);
+    padding-bottom: 48px;
+  }
+
+  .hero-panel {
+    transform: translateY(0);
+  }
+
+  .hero-copy h1 {
+    font-size: 60px;
+  }
+
+  .hero-copy h1 span {
+    font-size: 26px;
+  }
+
+  .search-auth-card {
+    width: min(680px, 100%);
+    border-radius: 28px;
+    grid-template-columns: 1fr;
+  }
+
+  .search-auth-card .login-tabs {
+    width: 100%;
+  }
+
+  .search-auth-card .qr-panel,
+  .search-auth-card .auth-form {
+    grid-template-columns: 1fr;
+  }
+
+  .search-auth-card .qr-frame {
+    display: none;
+  }
+
+  .search-auth-card .login-method,
+  .search-auth-card .submit-button {
+    width: 100%;
   }
 }
 
