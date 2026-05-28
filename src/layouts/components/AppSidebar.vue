@@ -124,7 +124,8 @@ const desktopTextClass = (item) => [
   width: 220px;
   height: calc(100dvh - var(--promo-banner-h, 0px));
   flex-direction: column;
-  background: #fff;
+  /* UI modification: mobile drawer follows the same dark Unifydata sidebar style. */
+  background: #151921;
   box-shadow: 0 24px 80px rgba(15, 23, 42, 0.22);
   transform: translateX(-100%);
   transition: transform 300ms ease-out;
@@ -145,6 +146,7 @@ const desktopTextClass = (item) => [
 .app-sidebar-mobile-logo {
   width: auto;
   height: 22px;
+  filter: brightness(0) invert(1);
 }
 
 .app-sidebar-mobile-nav {
@@ -168,34 +170,34 @@ const desktopTextClass = (item) => [
   gap: 10px;
   border-radius: 8px;
   padding: 8px 10px;
-  color: #4b5563;
+  color: rgba(255, 255, 255, 0.66);
   font-size: 13px;
   text-decoration: none;
   transition: background-color 220ms ease, color 220ms ease;
 }
 
 .app-sidebar-mobile-link:hover {
-  color: #111827;
-  background: #f9fafb;
+  color: #fff;
+  background: rgba(96, 130, 247, 0.16);
 }
 
 .app-sidebar-mobile-link.is-featured {
-  color: #4c53f5;
-  background: linear-gradient(135deg, rgba(76, 83, 245, 0.12), rgba(139, 92, 246, 0.1));
+  color: #fff;
+  background: rgba(96, 130, 247, 0.16);
   font-weight: 700;
-  box-shadow: inset 0 0 0 1px rgba(76, 83, 245, 0.16);
+  box-shadow: none;
 }
 
 .app-sidebar-mobile-link.is-active {
-  color: #111827;
-  background: #f3f4f6;
+  color: #fff;
+  background: rgba(96, 130, 247, 0.18);
   font-weight: 600;
 }
 
 .app-sidebar-mobile-link.is-featured.is-active {
-  color: #4c53f5;
-  background: linear-gradient(135deg, rgba(76, 83, 245, 0.18), rgba(139, 92, 246, 0.14));
-  box-shadow: inset 0 0 0 1px rgba(76, 83, 245, 0.24);
+  color: #fff;
+  background: rgba(96, 130, 247, 0.18);
+  box-shadow: none;
 }
 
 .app-sidebar-mobile-icon {

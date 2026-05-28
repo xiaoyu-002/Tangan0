@@ -5,7 +5,8 @@
 .route-transition-root {
   position: relative;
   min-height: 100dvh;
-  background: #eef3ff;
+  /* UI modification: Unifydata global white page background outside auth route content. */
+  background: #ffffff;
 }
 
 .route-page-shell {
@@ -69,6 +70,32 @@
 
 .app-page-shell {
   min-height: 100dvh;
+  --chj-primary: #6082f7;
+  --chj-secondary: #e2bbff;
+  --chj-growth: #dbffba;
+  --chj-sidebar: #151921;
+  --chj-title: #151921;
+  --chj-body: #333333;
+  --chj-muted: #666666;
+  --chj-card: #ffffff;
+  --chj-card-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  --chj-sidebar-width: 220px;
+  --chj-secondary-sidebar-width: 220px;
+  --agent-rgb: 96 130 247;
+  --primary: #6082f7;
+  --primary-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #151921;
+  --card: #ffffff;
+  --muted: #f5f7fb;
+  --muted-foreground: #666666;
+  --border: rgba(21, 25, 33, 0.08);
+  color: var(--chj-body);
+  background: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  line-height: 1.6;
 }
 
 .app-page-shell [class*="fixed bottom-0 right-0 left-0"][class*="dock-left"],
@@ -80,6 +107,252 @@
 .app-page-shell [data-ph-capture-attribute-button-name="nav:topbar_login_clicked"],
 .app-page-shell [href="https://www.chuhaijiang.com/login"] {
   display: none !important;
+}
+
+/* UI modification: Unifydata global layout offsets and white work surface for every non-login route. */
+.app-page-shell main {
+  color: var(--chj-body) !important;
+  background: #ffffff !important;
+}
+
+.app-page-shell main[style*="margin-left:244px"],
+.app-page-shell main[style*="margin-left: 244px"],
+.app-page-shell .create-main {
+  margin-left: calc(var(--chj-sidebar-width) + var(--chj-secondary-sidebar-width)) !important;
+}
+
+.app-page-shell .chat-page {
+  margin-left: calc(var(--chj-sidebar-width) + var(--chj-secondary-sidebar-width)) !important;
+  --agent-rgb: 96 130 247 !important;
+  --agent-color: var(--chj-primary) !important;
+  --agent-soft: #eef2ff !important;
+}
+
+.app-page-shell .workspace-dashboard-page,
+.app-page-shell .tasks-page,
+.app-page-shell .agent-page,
+.app-page-shell main[style*="margin-left:220px"],
+.app-page-shell main[style*="margin-left: 220px"] {
+  margin-left: var(--chj-sidebar-width) !important;
+}
+
+.app-page-shell :where(.workspace-dashboard-topbar, .tasks-topbar, .agent-topbar, .chat-topbar, .create-topbar),
+.app-page-shell main > .sticky.z-30,
+.app-page-shell main > div.sticky.z-30 {
+  border-bottom: 1px solid rgba(21, 25, 33, 0.08) !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.app-page-shell :where(.workspace-dashboard-container, .create-content, .tasks-shell, .agent-workspace, .chat-workspace) {
+  gap: var(--chj-module-gap) !important;
+}
+
+/* UI modification: Unifydata global typography scale and semantic colors. */
+.app-page-shell :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--chj-title) !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.app-page-shell :where(p, span, small, dt, dd, li, th, td, label, input, textarea, select, button, a) {
+  font-family: inherit;
+}
+
+.app-page-shell :where(.text-gray-400, .text-gray-500, .text-gray-600, .text-muted-foreground, small, .tasks-eyebrow, .settings-label) {
+  color: var(--chj-muted) !important;
+}
+
+.app-page-shell :where(.text-gray-700, .text-gray-800, .text-gray-900, .text-foreground) {
+  color: var(--chj-title) !important;
+}
+
+.app-page-shell :where(strong, b, .font-bold, .font-semibold, .tabular-nums) {
+  color: var(--chj-title);
+  font-weight: 700;
+}
+
+/* UI modification: Unifydata brand palette applied to existing utility classes without changing DOM bindings. */
+.app-page-shell [class~="bg-primary"],
+.app-page-shell [class~="data-[state=active]:bg-primary"][data-state="active"],
+.app-page-shell [class~="data-[state=on]:bg-primary"][data-state="on"],
+.app-page-shell [class~="data-[state=checked]:bg-primary"][data-state="checked"] {
+  background-color: var(--chj-primary) !important;
+}
+
+.app-page-shell [class~="bg-primary/10"],
+.app-page-shell [class~="active:bg-primary/10"]:active {
+  background-color: rgba(96, 130, 247, 0.1) !important;
+}
+
+.app-page-shell [class~="text-primary"],
+.app-page-shell [class~="hover:text-primary"]:hover,
+.app-page-shell [class~="data-[state=active]:text-primary"][data-state="active"] {
+  color: var(--chj-primary) !important;
+}
+
+.app-page-shell [class~="text-primary-foreground"],
+.app-page-shell [class~="data-[state=active]:text-primary-foreground"][data-state="active"] {
+  color: #ffffff !important;
+}
+
+.app-page-shell [class~="border-primary"],
+.app-page-shell [class~="outline-primary"] {
+  border-color: var(--chj-primary) !important;
+  outline-color: var(--chj-primary) !important;
+}
+
+/* UI modification: Unifydata card system - white cards, 8px radius, soft shadow, no visible borders. */
+.app-page-shell
+  :where(
+    .workspace-dashboard-card,
+    .workspace-unify-card,
+    .task-list-panel,
+    .task-detail-panel,
+    .task-detail-card,
+    .chat-main-card,
+    .chat-settings-card,
+    .agent-output-panel,
+    .agent-control-card,
+    .agent-card,
+    .mode-toggle,
+    .history-item,
+    .output-scroll
+  ),
+.app-page-shell :where(article, section, aside, div, a)[class~="rounded-2xl"][class*="border"],
+.app-page-shell :where(article, section, aside, div, a)[class~="rounded-xl"][class*="border"],
+.app-page-shell :where(article, section, aside, div, a)[class~="rounded-2xl"][class*="ring-"],
+.app-page-shell :where(article, section, aside, div, a)[class~="rounded-xl"][class*="ring-"],
+.app-page-shell :where(article, section, aside, div, a)[class*="shadow-sm"][class*="bg-white"] {
+  border-color: transparent !important;
+  border-radius: 8px !important;
+  background: var(--chj-card) !important;
+  box-shadow: var(--chj-card-shadow) !important;
+  backdrop-filter: none !important;
+}
+
+.app-page-shell :where(.workspace-dashboard-card, .task-detail-card, .chat-settings-card, .agent-output-panel, .agent-control-card) {
+  padding: 20px !important;
+}
+
+.app-page-shell :where(.rounded-3xl, .rounded-2xl, .rounded-xl) {
+  border-radius: 8px !important;
+}
+
+.app-page-shell :where(.border, .border-gray-100, .border-gray-200, .ring-1, [class*="border-gray-"]) {
+  border-color: rgba(21, 25, 33, 0.08) !important;
+}
+
+/* UI modification: Unifydata controls - primary buttons and neutral secondary buttons. */
+.app-page-shell :where(button, a)[class*="bg-primary"],
+.app-page-shell :where(.chat-link, .outline-button, .submit-button, .complete-button) {
+  border-radius: 6px !important;
+  border-color: var(--chj-primary) !important;
+  background: var(--chj-primary) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.app-page-shell :where(button, a)[class*="bg-primary"]:hover,
+.app-page-shell :where(.chat-link, .outline-button, .submit-button, .complete-button):hover {
+  background: #4f71e8 !important;
+  color: #ffffff !important;
+}
+
+.app-page-shell :where(input, textarea, select, [contenteditable="true"]) {
+  border-color: rgba(21, 25, 33, 0.12) !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  color: var(--chj-body) !important;
+}
+
+.app-page-shell :where(input, textarea, select, [contenteditable="true"]):focus {
+  border-color: var(--chj-primary) !important;
+  box-shadow: 0 0 0 3px rgba(96, 130, 247, 0.12) !important;
+  outline: none !important;
+}
+
+/* UI modification: Unifydata underline tabs across existing tab implementations. */
+.app-page-shell [role="tablist"] {
+  display: flex;
+  gap: 24px !important;
+  border-bottom: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.app-page-shell [role="tab"],
+.app-page-shell .task-tabs button,
+.app-page-shell .workspace-dashboard-tabs button {
+  position: relative;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--chj-muted) !important;
+  box-shadow: none !important;
+}
+
+.app-page-shell [role="tab"][aria-selected="true"],
+.app-page-shell .task-tabs button.task-tab--active,
+.app-page-shell .workspace-dashboard-tabs button[class*="bg-primary"] {
+  color: var(--chj-title) !important;
+  font-weight: 600 !important;
+}
+
+.app-page-shell [role="tab"][aria-selected="true"]::after,
+.app-page-shell .task-tabs button.task-tab--active::after,
+.app-page-shell .workspace-dashboard-tabs button[class*="bg-primary"]::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--chj-primary);
+  content: "";
+}
+
+.app-page-shell .task-tab-indicator {
+  display: none !important;
+}
+
+/* UI modification: Unifydata table and list readability. */
+.app-page-shell :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--chj-body);
+}
+
+.app-page-shell :where(th) {
+  color: var(--chj-title) !important;
+  font-weight: 600 !important;
+  background: #f7f8fb !important;
+}
+
+.app-page-shell :where(td, th) {
+  border-color: rgba(21, 25, 33, 0.08) !important;
+}
+
+.app-page-shell :where(.task-list, .task-list-panel, .agent-list, .module-list, .workspace-dashboard-message-list, .workspace-dashboard-task-list) {
+  gap: 16px !important;
+}
+
+@media (max-width: 767px) {
+  .app-page-shell main,
+  .app-page-shell .workspace-dashboard-page,
+  .app-page-shell .tasks-page,
+  .app-page-shell .agent-page,
+  .app-page-shell .chat-page,
+  .app-page-shell .create-main {
+    margin-left: 0 !important;
+  }
+
+  .app-page-shell [role="tablist"] {
+    gap: 16px !important;
+    overflow-x: auto;
+  }
 }
 
 .markdown-body {

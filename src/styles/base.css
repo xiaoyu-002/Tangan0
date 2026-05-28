@@ -2,3 +2,35 @@
 @import './vendor/91cf5101a3a4950f.css';
 @import './vendor/b8200832a74f356a.css';
 @import './page-overrides.css';
+
+/* UI modification: global Unifydata-style design tokens shared by non-login app pages. */
+:root {
+  --chj-primary: #6082f7;
+  --chj-secondary: #e2bbff;
+  --chj-growth: #dbffba;
+  --chj-sidebar: #151921;
+  --chj-title: #151921;
+  --chj-body: #333333;
+  --chj-muted: #666666;
+  --chj-card: #ffffff;
+  --chj-card-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  --chj-radius-card: 8px;
+  --chj-radius-control: 6px;
+  --chj-page-padding: 24px;
+  --chj-module-gap: 24px;
+  --chj-sidebar-width: 220px;
+  --chj-secondary-sidebar-width: 220px;
+  --primary: #6082f7;
+  --primary-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #151921;
+  --card: #ffffff;
+  --card-foreground: #151921;
+  --muted: #f5f7fb;
+  --muted-foreground: #666666;
+  --accent: #eef2ff;
+  --accent-foreground: #151921;
+  --border: rgba(21, 25, 33, 0.08);
+  --ring: #6082f7;
+  --nprogress-color: #6082f7;
+}

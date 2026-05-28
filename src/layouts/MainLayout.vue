@@ -73,6 +73,7 @@ onBeforeUnmount(() => {
   min-height: 100dvh;
   flex-direction: row;
   overflow-x: clip;
-  background: linear-gradient(to right, #f5f6fc, #f7f5fc);
+  /* UI modification: Unifydata white main work surface, matching WorkspacePage.vue. */
+  background: #ffffff;
 }
 </style>
