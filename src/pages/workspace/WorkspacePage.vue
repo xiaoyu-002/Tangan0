@@ -68,6 +68,63 @@ const performanceCards = computed(() => {
   }))
 })
 const opportunityPanels = computed(() => activeMarketSnapshot.value.opportunities || workspaceData.value?.opportunities || [])
+// UI modification: view-only projections for the Unifydata dashboard layout.
+// These values reuse existing workspace data and do not change API state, events, or business logic.
+const dashboardKpiCards = computed(() => {
+  const displayLabels = ['Visitors', 'Contacts', 'Deals', 'Revenue']
+  return performanceCards.value
+    .flatMap((card) => (card.metrics || []).map((metric) => ({
+      ...metric,
+      displayLabel: displayLabels.length ? displayLabels.shift() : metric.label,
+      sourceTitle: card.title,
+      href: metric.href || card.href,
+    })))
+    .slice(0, 4)
+})
+const dashboardLineCard = computed(() => performanceCards.value[0] || null)
+const dashboardChannelCards = computed(() => performanceCards.value.slice(0, 3))
+const dashboardTableRows = computed(() => support.value?.tasks?.items || [])
+const dashboardChannelSegments = computed(() => {
+  const colors = ['#6082F7', '#E2BBFF', '#DBFFBA']
+  const values = dashboardChannelCards.value.map((card) => {
+    const chartValues = Array.isArray(card.chart?.values) ? card.chart.values : []
+    return Number(chartValues[chartValues.length - 1]) || 1
+  })
+  const total = values.reduce((sum, value) => sum + value, 0) || 1
+
+  return dashboardChannelCards.value.map((card, index) => ({
+    ...card,
+    color: colors[index % colors.length],
+    value: values[index],
+    percent: Math.round((values[index] / total) * 100),
+  }))
+})
+const dashboardDonutStyle = computed(() => {
+  let cursor = 0
+  const stops = dashboardChannelSegments.value.map((segment) => {
+    const start = cursor
+    cursor += segment.percent
+    return `${segment.color} ${start}% ${cursor}%`
+  })
+
+  return { background: `conic-gradient(${stops.join(', ')})` }
+})
+
+const getChartPoints = (values = [], width = 320, height = 136) => {
+  if (!Array.isArray(values) || values.length === 0) return ''
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const range = max - min || 1
+  const step = values.length > 1 ? width / (values.length - 1) : width
+
+  return values
+    .map((value, index) => {
+      const x = Math.round(index * step)
+      const y = Math.round(height - 12 - ((value - min) / range) * (height - 24))
+      return `${x},${y}`
+    })
+    .join(' ')
+}
 
 const syncActiveMarket = () => {
   if (!markets.value.some((market) => market.code === activeMarketCode.value)) {
@@ -144,11 +201,11 @@ onBeforeUnmount(() => {
 
 <template>
   <main
-    class="flex-1 min-h-dvh min-w-0 flex flex-col max-md:!ml-0"
-    style="margin-left: 68px; transition: margin-left 200ms ease-out; background: transparent"
+    class="workspace-dashboard-page flex-1 min-h-dvh min-w-0 flex flex-col max-md:!ml-0"
+    style="margin-left: 220px; transition: margin-left 200ms ease-out; background: #ffffff"
   >
     <div
-      class="sticky z-30 h-header transition-shadow duration-200 [clip-path:inset(0_0_-20px_0)] bg-[#f6f5fc]/85 backdrop-blur-md"
+      class="workspace-dashboard-topbar sticky z-30 h-header transition-shadow duration-200 [clip-path:inset(0_0_-20px_0)] bg-[#f6f5fc]/85 backdrop-blur-md"
       style="top: var(--promo-banner-h, 0px)"
     >
       <div class="md:hidden flex items-center px-3 h-full">
@@ -163,8 +220,20 @@ onBeforeUnmount(() => {
         <div class="ml-auto shrink-0"></div>
       </div>
 
-      <div class="hidden md:flex items-center px-5 h-full">
-        <nav aria-label="Breadcrumb" class="min-w-0">
+      <!-- UI modification: Unifydata-style top title bar with Dashboard title and search box. -->
+      <div class="workspace-dashboard-titlebar hidden md:flex items-center px-5 h-full">
+        <div class="workspace-dashboard-heading">
+          <h1 class="workspace-dashboard-title">Dashboard</h1>
+          <p class="workspace-dashboard-subtitle">{{ workspaceData?.header?.description }}</p>
+        </div>
+        <label class="workspace-dashboard-search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input type="search" aria-label="Search" placeholder="Search" autocomplete="off">
+        </label>
+        <nav aria-label="Breadcrumb" class="workspace-dashboard-breadcrumb min-w-0">
           <ol class="flex items-center gap-1.5 text-sm list-none m-0 p-0">
             <li class="flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 text-gray-700" aria-hidden="true">
@@ -177,14 +246,13 @@ onBeforeUnmount(() => {
             </li>
           </ol>
         </nav>
-        <div class="ml-auto shrink-0"></div>
       </div>
     </div>
 
     <div class="flex-1 relative">
       <div class="pointer-events-none fixed inset-0 z-0" style="background: linear-gradient(135deg, rgba(238,240,254,0.6) 0%, rgba(238,240,254,0) 35%)"></div>
 
-      <div class="w-full relative z-10 max-w-4xl lg:max-w-6xl 2xl:max-w-8xl 3xl:max-w-9xl 4xl:max-w-10xl mx-auto px-4 md:px-6 2xl:px-8 pb-24">
+      <div class="workspace-dashboard-container w-full relative z-10 max-w-4xl lg:max-w-6xl 2xl:max-w-8xl 3xl:max-w-9xl 4xl:max-w-10xl mx-auto px-4 md:px-6 2xl:px-8 pb-24">
         <WorkspaceSkeleton v-if="isLoading && !workspaceData" />
 
         <div v-else-if="loadError && !workspaceData" class="flex min-h-[55vh] items-center justify-center">
@@ -227,39 +295,22 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </Transition>
-          <div class="workspace-market-content" :class="{ 'is-switching': isMarketSwitching }">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-6 3xl:pt-8 4xl:pt-10 mb-5 3xl:mb-6 4xl:mb-8">
-            <div>
-              <h1 class="text-xl 3xl:text-2xl font-serif italic text-gray-900">{{ workspaceData.header.title }}</h1>
-              <p class="mt-1 text-xs text-gray-500 max-w-xl">{{ workspaceData.header.description }}</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="shrink-0 text-[10px] font-semibold tracking-wide text-violet-600 bg-violet-50 px-1.5 py-0.5 rounded">
-                {{ workspaceData.header.badge }}
-              </span>
-              <div
-                class="min-w-0 max-w-[420px] overflow-hidden text-xs text-gray-500 bg-white/70 border border-gray-100 rounded-full px-3 py-1 shadow-sm"
-                aria-live="polite"
-              >
+          <div class="workspace-market-content workspace-dashboard-content" :class="{ 'is-switching': isMarketSwitching }">
+            <!-- UI modification: compact market/news control strip using existing data and market switch event. -->
+            <div class="workspace-dashboard-meta-row">
+              <div class="workspace-dashboard-news" aria-live="polite">
+                <span class="workspace-dashboard-badge">{{ workspaceData.header.badge }}</span>
                 <span :key="newsIndex" class="workspace-news-item truncate">{{ currentNews }}</span>
               </div>
-            </div>
-          </div>
-
-          <section class="mb-8 3xl:mb-10 4xl:mb-12">
-            <div class="flex items-center justify-between mb-3 3xl:mb-4">
-              <h3 class="text-base 3xl:text-lg font-serif italic text-gray-800 flex items-center gap-2">今日表现</h3>
               <div class="relative">
                 <button
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all duration-200 cursor-pointer bg-white border border-gray-200 text-gray-600 hover:border-gray-300 hover:shadow-sm"
+                  class="workspace-dashboard-market-button"
                   type="button"
                   aria-haspopup="listbox"
                   :aria-expanded="String(isMarketMenuOpen)"
                   @click="isMarketMenuOpen = !isMarketMenuOpen"
                 >
-                  <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-violet-50 text-base leading-none ring-1 ring-violet-100 shrink-0" aria-hidden="true">
-                    {{ getMarketFlag(activeMarket) }}
-                  </span>
+                  <span aria-hidden="true">{{ getMarketFlag(activeMarket) }}</span>
                   <span>{{ activeMarket.label }}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +322,7 @@ onBeforeUnmount(() => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="w-3 h-3 text-gray-400 transition-transform duration-200"
+                    class="workspace-dashboard-chevron"
                     :class="{ 'rotate-180': isMarketMenuOpen }"
                     aria-hidden="true"
                   >
@@ -280,107 +331,213 @@ onBeforeUnmount(() => {
                 </button>
                 <div
                   v-if="isMarketMenuOpen"
-                  class="absolute right-0 top-full z-40 mt-2 w-56 overflow-hidden rounded-2xl border border-gray-100 bg-white/95 p-1.5 shadow-[0_18px_45px_rgba(15,23,42,0.12)] backdrop-blur"
+                  class="workspace-dashboard-market-menu"
                   role="listbox"
                 >
                   <button
                     v-for="market in markets"
                     :key="market.code"
                     type="button"
-                    class="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left transition-colors hover:bg-violet-50"
-                    :class="market.code === activeMarketCode ? 'bg-violet-50 text-violet-700' : 'text-gray-600'"
+                    class="workspace-dashboard-market-option"
+                    :class="market.code === activeMarketCode ? 'is-active' : ''"
                     role="option"
                     :aria-selected="String(market.code === activeMarketCode)"
                     @click="selectMarket(market.code)"
                   >
-                    <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-violet-50 text-base leading-none ring-1 ring-violet-100">{{ getMarketFlag(market) }}</span>
-                    <span class="min-w-0 flex-1">
-                      <span class="block text-xs font-semibold">{{ market.label }} · {{ market.code }}</span>
-                      <span class="block truncate text-[11px] text-gray-400">{{ market.note }}</span>
+                    <span>{{ getMarketFlag(market) }}</span>
+                    <span class="workspace-dashboard-market-copy">
+                      <span>{{ market.label }} / {{ market.code }}</span>
+                      <small>{{ market.note }}</small>
                     </span>
-                    <span v-if="market.code === activeMarketCode" class="h-1.5 w-1.5 rounded-full bg-violet-500"></span>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 2xl:gap-4 4xl:gap-5 mb-3">
-              <WorkspacePerformanceCard
-                v-for="card in performanceCards"
-                :key="card.id"
-                :card="card"
-              />
-            </div>
-          </section>
 
-          <section class="mb-8 3xl:mb-10 4xl:mb-12 animate-fade-in" data-section="ai-brief">
-            <div class="flex items-center justify-between mb-3 3xl:mb-4">
-              <h3 class="text-base 3xl:text-lg font-serif italic text-gray-800 flex items-center gap-2">
-                今日机会
-                <span class="inline-flex items-center gap-1 text-[10px] text-muted-foreground">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-violet-500" aria-hidden="true">
-                    <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
-                    <path d="M20 2v4"></path>
-                    <path d="M22 4h-4"></path>
-                    <circle cx="4" cy="20" r="2"></circle>
-                  </svg>
-                  AI 洞察
+            <!-- UI modification: first row - 4 KPI cards in 2x2 layout, reusing existing metric links and values. -->
+            <section class="workspace-dashboard-kpi-grid" aria-label="Dashboard metrics">
+              <a
+                v-for="metric in dashboardKpiCards"
+                :key="`${metric.sourceTitle}-${metric.label}`"
+                :href="`#${metric.href}`"
+                class="workspace-dashboard-card workspace-dashboard-kpi-card"
+              >
+                <span class="workspace-dashboard-kpi-label">{{ metric.displayLabel }}</span>
+                <strong class="workspace-dashboard-kpi-value">{{ metric.value }}</strong>
+                <span class="workspace-dashboard-kpi-footer">
+                  <span :class="metric.deltaClass || 'text-emerald-600'">{{ metric.delta }}</span>
+                  <span>{{ metric.label }}</span>
                 </span>
-              </h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 2xl:gap-4 4xl:gap-5 md:[grid-auto-rows:680px]">
-              <WorkspaceOpportunityCard
-                v-for="panel in opportunityPanels"
-                :key="`${activeMarketCode}-${panel.id}`"
-                :panel="panel"
-              />
-            </div>
-          </section>
+              </a>
+            </section>
 
-          <section v-if="support" class="mb-8 3xl:mb-10 4xl:mb-12">
-            <h3 class="text-base 3xl:text-lg font-serif italic text-gray-800 mb-3 3xl:mb-4">对话与任务</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 2xl:gap-4 4xl:gap-5">
-              <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col">
-                <div class="flex items-center justify-between mb-3">
-                  <a class="flex items-center gap-0.5 group" :href="`#${support.chat.href}`">
-                    <h3 class="text-sm font-medium text-gray-900 group-hover:text-gray-600 transition-colors">{{ support.chat.title }}</h3>
-                    <span class="relative w-3.5 h-3.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute inset-0 w-3.5 h-3.5 text-gray-300 group-hover:opacity-0 group-hover:translate-x-1 transition-all duration-300" aria-hidden="true">
-                        <path d="m9 18 6-6-6-6"></path>
-                      </svg>
-                    </span>
-                  </a>
+            <!-- UI modification: second row - Deals & Revenue line chart and Top Revenue Channels donut chart. -->
+            <section class="workspace-dashboard-chart-grid">
+              <article class="workspace-dashboard-card workspace-dashboard-line-card">
+                <div class="workspace-dashboard-card-header">
+                  <div>
+                    <h2>Deals &amp; Revenue</h2>
+                    <p>{{ dashboardLineCard?.title }}</p>
+                  </div>
+                  <a v-if="dashboardLineCard" :href="`#${dashboardLineCard.href}`" class="workspace-dashboard-link">View</a>
                 </div>
-                <p class="mb-3 text-xs text-gray-500">{{ support.chat.summary }}</p>
-                <div class="space-y-2">
+                <svg class="workspace-dashboard-line-chart" viewBox="0 0 320 136" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="0" y1="112" x2="320" y2="112"></line>
+                  <line x1="0" y1="76" x2="320" y2="76"></line>
+                  <line x1="0" y1="40" x2="320" y2="40"></line>
+                  <polyline
+                    :points="getChartPoints(dashboardLineCard?.chart?.values || [])"
+                    fill="none"
+                    stroke="#6082F7"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></polyline>
+                </svg>
+                <div class="workspace-dashboard-chart-caption" v-if="dashboardLineCard">
+                  <span>{{ dashboardLineCard.chart.minLabel }}</span>
+                  <strong>{{ dashboardLineCard.chart.maxLabel }}</strong>
+                </div>
+                <div class="workspace-dashboard-chart-metrics" v-if="dashboardLineCard">
                   <a
-                    v-for="message in support.chat.messages"
-                    :key="`${message.agent}-${message.time}`"
-                    :href="`#${support.chat.href}`"
-                    class="flex items-start gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-violet-50/50 transition-colors cursor-pointer group"
+                    v-for="metric in dashboardLineCard.metrics"
+                    :key="metric.label"
+                    :href="`#${metric.href || dashboardLineCard.href}`"
                   >
-                    <img :src="message.avatar" :alt="message.agent" class="w-8 h-8 rounded-full object-cover object-top shrink-0">
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-2">
-                        <p class="text-xs font-semibold text-gray-800">{{ message.agent }}</p>
-                        <span class="text-[10px] text-gray-300">{{ message.time }}</span>
-                      </div>
-                      <p class="mt-1 text-xs leading-relaxed text-gray-500 group-hover:text-gray-700 transition-colors">{{ message.text }}</p>
-                    </div>
+                    <span>{{ metric.label }}</span>
+                    <strong>{{ metric.value }}</strong>
+                    <em :class="metric.deltaClass || 'text-emerald-600'">{{ metric.delta }}</em>
                   </a>
                 </div>
               </article>
 
-              <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col">
-                <div class="flex items-center justify-between mb-2">
-                  <a class="flex items-center gap-0.5 group" :href="`#${support.tasks.href}`">
-                    <h3 class="text-sm font-medium text-gray-900 group-hover:text-gray-600 transition-colors">{{ support.tasks.title }}</h3>
-                    <span class="relative w-3.5 h-3.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute inset-0 w-3.5 h-3.5 text-gray-300 group-hover:opacity-0 group-hover:translate-x-1 transition-all duration-300" aria-hidden="true">
-                        <path d="m9 18 6-6-6-6"></path>
-                      </svg>
-                    </span>
+              <article class="workspace-dashboard-card workspace-dashboard-donut-card">
+                <div class="workspace-dashboard-card-header">
+                  <div>
+                    <h2>Top Revenue Channels</h2>
+                    <p>{{ activeMarket.label }} / {{ activeMarket.code }}</p>
+                  </div>
+                </div>
+                <div class="workspace-dashboard-donut-wrap">
+                  <div class="workspace-dashboard-donut" :style="dashboardDonutStyle">
+                    <span>{{ dashboardChannelSegments[0]?.percent || 0 }}%</span>
+                  </div>
+                  <div class="workspace-dashboard-donut-legend">
+                    <a
+                      v-for="segment in dashboardChannelSegments"
+                      :key="segment.id"
+                      :href="`#${segment.href}`"
+                      class="workspace-dashboard-legend-row"
+                    >
+                      <i :style="{ backgroundColor: segment.color }"></i>
+                      <span>{{ segment.title }}</span>
+                      <strong>{{ segment.percent }}%</strong>
+                    </a>
+                  </div>
+                </div>
+                <div class="workspace-dashboard-channel-detail">
+                  <div v-for="segment in dashboardChannelSegments.slice(1)" :key="`${segment.id}-metrics`">
+                    <h3>{{ segment.title }}</h3>
+                    <a
+                      v-for="metric in segment.metrics"
+                      :key="`${segment.id}-${metric.label}`"
+                      :href="`#${metric.href || segment.href}`"
+                    >
+                      <span>{{ metric.label }}</span>
+                      <strong>{{ metric.value }}</strong>
+                      <em :class="metric.deltaClass || 'text-emerald-600'">{{ metric.delta }}</em>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </section>
+
+            <!-- UI modification: third row - full-width Campaign Performance table using existing task data and links. -->
+            <section v-if="support" class="workspace-dashboard-card workspace-dashboard-table-card">
+              <div class="workspace-dashboard-card-header">
+                <div>
+                  <h2>Campaign Performance</h2>
+                  <p>{{ support.tasks.title }}</p>
+                </div>
+                <a :href="`#${support.tasks.href}`" class="workspace-dashboard-link">View all</a>
+              </div>
+              <div class="workspace-dashboard-table-wrap">
+                <table class="workspace-dashboard-table">
+                  <thead>
+                    <tr>
+                      <th>Campaign</th>
+                      <th>Agent</th>
+                      <th>Status</th>
+                      <th>Progress</th>
+                      <th>Due</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="task in dashboardTableRows" :key="task.title">
+                      <td>
+                        <a :href="`#${support.tasks.href}`">{{ task.title }}</a>
+                      </td>
+                      <td>{{ task.agent }}</td>
+                      <td><span class="workspace-dashboard-status">{{ task.status }}</span></td>
+                      <td>
+                        <div class="workspace-dashboard-progress">
+                          <span :style="{ width: `${task.progress}%` }"></span>
+                        </div>
+                      </td>
+                      <td>{{ task.due }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- UI modification: original interactive opportunity tabs retained and styled in the new dashboard system. -->
+            <section class="workspace-dashboard-panel-section animate-fade-in" data-section="ai-brief">
+              <div class="workspace-dashboard-section-heading">
+                <h2>{{ workspaceData.header.title }}</h2>
+                <p>{{ workspaceData.header.description }}</p>
+              </div>
+              <div class="workspace-dashboard-opportunity-grid">
+                <WorkspaceOpportunityCard
+                  v-for="panel in opportunityPanels"
+                  :key="`${activeMarketCode}-${panel.id}`"
+                  :panel="panel"
+                />
+              </div>
+            </section>
+
+            <!-- UI modification: original support links and task filters retained below the dashboard table. -->
+            <section v-if="support" class="workspace-dashboard-support-grid">
+              <article class="workspace-dashboard-card workspace-dashboard-support-card">
+                <div class="workspace-dashboard-card-header">
+                  <a class="workspace-dashboard-card-title-link" :href="`#${support.chat.href}`">
+                    <h2>{{ support.chat.title }}</h2>
                   </a>
-                  <div class="flex rounded-md border border-border p-0.5 text-xs">
+                </div>
+                <p>{{ support.chat.summary }}</p>
+                <div class="workspace-dashboard-message-list">
+                  <a
+                    v-for="message in support.chat.messages"
+                    :key="`${message.agent}-${message.time}`"
+                    :href="`#${support.chat.href}`"
+                    class="workspace-dashboard-message-row"
+                  >
+                    <img :src="message.avatar" :alt="message.agent">
+                    <span>
+                      <strong>{{ message.agent }}</strong>
+                      <small>{{ message.text }}</small>
+                    </span>
+                    <time>{{ message.time }}</time>
+                  </a>
+                </div>
+              </article>
+
+              <article class="workspace-dashboard-card workspace-dashboard-support-card">
+                <div class="workspace-dashboard-card-header">
+                  <a class="workspace-dashboard-card-title-link" :href="`#${support.tasks.href}`">
+                    <h2>{{ support.tasks.title }}</h2>
+                  </a>
+                  <div class="workspace-dashboard-tabs">
                     <button
                       v-for="filter in support.tasks.filters"
                       :key="filter.key"
@@ -392,37 +549,22 @@ onBeforeUnmount(() => {
                     </button>
                   </div>
                 </div>
-                <div class="space-y-2">
+                <div class="workspace-dashboard-task-list">
                   <a
                     v-for="task in support.tasks.items"
                     :key="task.title"
                     :href="`#${support.tasks.href}`"
-                    class="block rounded-xl border border-gray-100 px-3 py-2.5 hover:bg-gray-50/80 transition-colors"
+                    class="workspace-dashboard-task-row"
                   >
-                    <div class="flex items-start justify-between gap-3">
-                      <div class="min-w-0">
-                        <p class="truncate text-xs font-semibold text-gray-900">{{ task.title }}</p>
-                        <p class="mt-1 text-[11px] text-gray-400">{{ task.agent }} · {{ task.due }}</p>
-                      </div>
-                      <span
-                        class="rounded-full px-2 py-0.5 text-[10px] font-semibold shrink-0"
-                        :class="task.tone === 'emerald' ? 'bg-emerald-50 text-emerald-600' : task.tone === 'sky' ? 'bg-sky-50 text-sky-600' : 'bg-amber-50 text-amber-600'"
-                      >
-                        {{ task.status }}
-                      </span>
-                    </div>
-                    <div class="mt-2 h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                      <div
-                        class="h-full rounded-full"
-                        :class="task.tone === 'emerald' ? 'bg-emerald-400' : task.tone === 'sky' ? 'bg-sky-400' : 'bg-amber-400'"
-                        :style="{ width: `${task.progress}%` }"
-                      ></div>
-                    </div>
+                    <span>
+                      <strong>{{ task.title }}</strong>
+                      <small>{{ task.agent }} / {{ task.due }}</small>
+                    </span>
+                    <em>{{ task.status }}</em>
                   </a>
                 </div>
               </article>
-            </div>
-          </section>
+            </section>
           </div>
         </template>
       </div>
@@ -432,7 +574,7 @@ onBeforeUnmount(() => {
   <div
     v-if="workspaceData?.dock"
     class="fixed bottom-0 right-0 left-0 md:left-[var(--dock-left)] md:[transition:left_200ms_cubic-bezier(0.16,1,0.3,1)] z-30 pointer-events-none animate-fade-in max-md:overflow-hidden"
-    style="--agent-rgb: 14 165 233; --dock-left: 68px;"
+    style="--agent-rgb: 96 130 247; --dock-left: 220px;"
   >
     <div class="pointer-events-none bg-gradient-to-t from-background/90 to-transparent" style="height:32px;opacity:0.8;transition:height 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms cubic-bezier(0.16, 1, 0.3, 1)"></div>
     <div class="bg-background/80 backdrop-blur-xl pointer-events-auto pb-3 sm:pb-5">
@@ -462,6 +604,623 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+/* UI modification: Unifydata layout, palette, and card system. */
+.workspace-dashboard-page {
+  --workspace-primary: #6082f7;
+  --workspace-secondary: #e2bbff;
+  --workspace-growth: #dbffba;
+  --workspace-ink: #151921;
+  --workspace-body: #333333;
+  --workspace-muted: #666666;
+  color: var(--workspace-body);
+  background: #fff !important;
+}
+
+.workspace-dashboard-topbar {
+  height: 92px !important;
+  border-bottom: 1px solid #eef0f4;
+  background: #fff !important;
+  backdrop-filter: none;
+}
+
+.workspace-dashboard-titlebar {
+  justify-content: space-between;
+  gap: 24px;
+  padding-right: 32px !important;
+  padding-left: 32px !important;
+}
+
+.workspace-dashboard-heading {
+  min-width: 0;
+}
+
+.workspace-dashboard-title {
+  margin: 0;
+  color: #151921;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.workspace-dashboard-subtitle {
+  max-width: 640px;
+  margin: 6px 0 0;
+  overflow: hidden;
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-search {
+  display: flex;
+  width: min(320px, 34vw);
+  height: 42px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #f5f7fb;
+  padding: 0 14px;
+  color: #666666;
+}
+
+.workspace-dashboard-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #333333;
+  font-size: 14px;
+}
+
+.workspace-dashboard-search input::placeholder {
+  color: #666666;
+}
+
+.workspace-dashboard-breadcrumb {
+  display: none;
+}
+
+.workspace-dashboard-page > .flex-1 {
+  background: #fff;
+}
+
+.workspace-dashboard-page .pointer-events-none.fixed.inset-0 {
+  display: none;
+}
+
+.workspace-dashboard-container {
+  max-width: 1180px !important;
+  padding-right: 32px !important;
+  padding-left: 32px !important;
+}
+
+.workspace-dashboard-page :deep(.workspace-dashboard-card),
+.workspace-dashboard-card {
+  border: 0 !important;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.workspace-dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 0 56px;
+}
+
+.workspace-dashboard-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.workspace-dashboard-news {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  color: #666666;
+  font-size: 13px;
+}
+
+.workspace-dashboard-badge {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: rgba(96, 130, 247, 0.1);
+  color: #6082f7;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.workspace-dashboard-market-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  border: 0;
+  border-radius: 8px;
+  background: #151921;
+  color: #fff;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.workspace-dashboard-chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform 180ms ease;
+}
+
+.workspace-dashboard-market-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(21, 25, 33, 0.16);
+  padding: 8px;
+}
+
+.workspace-dashboard-market-option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  padding: 10px;
+  color: #333333;
+  text-align: left;
+  cursor: pointer;
+}
+
+.workspace-dashboard-market-option:hover,
+.workspace-dashboard-market-option.is-active {
+  background: rgba(96, 130, 247, 0.1);
+  color: #6082f7;
+}
+
+.workspace-dashboard-market-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.workspace-dashboard-market-copy small {
+  overflow: hidden;
+  color: #666666;
+  font-size: 11px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.workspace-dashboard-kpi-card {
+  display: flex;
+  min-height: 156px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.workspace-dashboard-kpi-label {
+  color: #666666;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.workspace-dashboard-kpi-value {
+  margin-top: 18px;
+  color: #151921;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.workspace-dashboard-kpi-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  color: #666666;
+  font-size: 12px;
+}
+
+.workspace-dashboard-kpi-footer span:first-child {
+  border-radius: 999px;
+  background: #dbffba;
+  color: #151921 !important;
+  padding: 4px 8px;
+  font-weight: 700;
+}
+
+.workspace-dashboard-chart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr);
+  gap: 24px;
+}
+
+.workspace-dashboard-line-card,
+.workspace-dashboard-donut-card,
+.workspace-dashboard-table-card,
+.workspace-dashboard-support-card {
+  padding: 20px;
+}
+
+.workspace-dashboard-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.workspace-dashboard-card-header h2,
+.workspace-dashboard-section-heading h2 {
+  margin: 0;
+  color: #151921;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.workspace-dashboard-card-header p,
+.workspace-dashboard-section-heading p,
+.workspace-dashboard-support-card > p {
+  margin: 5px 0 0;
+  color: #666666;
+  font-size: 12px;
+}
+
+.workspace-dashboard-link,
+.workspace-dashboard-card-title-link {
+  color: #6082f7;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.workspace-dashboard-line-chart {
+  width: 100%;
+  height: 220px;
+  overflow: visible;
+}
+
+.workspace-dashboard-line-chart line {
+  stroke: #eef0f4;
+  stroke-width: 1;
+}
+
+.workspace-dashboard-chart-caption {
+  display: flex;
+  justify-content: space-between;
+  color: #666666;
+  font-size: 12px;
+}
+
+.workspace-dashboard-chart-caption strong {
+  color: #6082f7;
+  font-weight: 800;
+}
+
+.workspace-dashboard-chart-metrics,
+.workspace-dashboard-channel-detail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.workspace-dashboard-chart-metrics a,
+.workspace-dashboard-channel-detail a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  border-radius: 8px;
+  background: #f8f9fc;
+  padding: 10px;
+  color: #333333;
+  text-decoration: none;
+}
+
+.workspace-dashboard-chart-metrics span,
+.workspace-dashboard-channel-detail span {
+  overflow: hidden;
+  color: #666666;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-chart-metrics strong,
+.workspace-dashboard-channel-detail strong {
+  color: #151921;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.workspace-dashboard-chart-metrics em,
+.workspace-dashboard-channel-detail em {
+  grid-column: 1 / -1;
+  color: #151921 !important;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.workspace-dashboard-channel-detail {
+  grid-template-columns: 1fr;
+}
+
+.workspace-dashboard-channel-detail > div {
+  display: grid;
+  gap: 10px;
+}
+
+.workspace-dashboard-channel-detail h3 {
+  margin: 0;
+  color: #151921;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.workspace-dashboard-donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.workspace-dashboard-donut {
+  position: relative;
+  display: grid;
+  width: 168px;
+  height: 168px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.workspace-dashboard-donut::after {
+  position: absolute;
+  inset: 36px;
+  border-radius: inherit;
+  background: #fff;
+  content: "";
+}
+
+.workspace-dashboard-donut span {
+  position: relative;
+  z-index: 1;
+  color: #151921;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.workspace-dashboard-donut-legend {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.workspace-dashboard-legend-row {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  color: #333333;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.workspace-dashboard-legend-row i {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.workspace-dashboard-legend-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-legend-row strong {
+  color: #151921;
+  font-weight: 700;
+}
+
+.workspace-dashboard-table-wrap {
+  overflow-x: auto;
+}
+
+.workspace-dashboard-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  color: #333333;
+  font-size: 13px;
+}
+
+.workspace-dashboard-table th {
+  padding: 0 14px 12px;
+  color: #666666;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.workspace-dashboard-table td {
+  border-top: 1px solid #eef0f4;
+  padding: 16px 14px;
+  vertical-align: middle;
+}
+
+.workspace-dashboard-table a {
+  color: #151921;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.workspace-dashboard-status {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(96, 130, 247, 0.1);
+  color: #6082f7;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.workspace-dashboard-progress {
+  width: 120px;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef0f4;
+}
+
+.workspace-dashboard-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #6082f7;
+}
+
+.workspace-dashboard-panel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.workspace-dashboard-opportunity-grid,
+.workspace-dashboard-support-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.workspace-dashboard-message-list,
+.workspace-dashboard-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.workspace-dashboard-message-row,
+.workspace-dashboard-task-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #333333;
+  text-decoration: none;
+}
+
+.workspace-dashboard-message-row img {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.workspace-dashboard-message-row span,
+.workspace-dashboard-task-row span {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.workspace-dashboard-message-row strong,
+.workspace-dashboard-task-row strong {
+  overflow: hidden;
+  color: #151921;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-message-row small,
+.workspace-dashboard-task-row small {
+  overflow: hidden;
+  color: #666666;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-dashboard-message-row time,
+.workspace-dashboard-task-row em {
+  flex: 0 0 auto;
+  color: #666666;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.workspace-dashboard-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.workspace-dashboard-tabs button[class*="bg-primary"] {
+  background: #6082f7 !important;
+  color: #fff !important;
+}
+
+@media (max-width: 1024px) {
+  .workspace-dashboard-chart-grid,
+  .workspace-dashboard-opportunity-grid,
+  .workspace-dashboard-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-dashboard-donut-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .workspace-dashboard-page {
+    margin-left: 0 !important;
+  }
+
+  .workspace-dashboard-topbar {
+    height: var(--header-height) !important;
+  }
+
+  .workspace-dashboard-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .workspace-news-item {
   display: block;
   animation: workspace-news-slide 520ms ease both;

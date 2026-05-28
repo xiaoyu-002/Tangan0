@@ -63,7 +63,7 @@ const setTab = (key) => {
 </script>
 
 <template>
-  <article class="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col min-w-0 h-[680px]">
+  <article class="workspace-unify-card rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col min-w-0 h-[680px]">
     <div class="w-full px-4 py-3 flex items-center gap-2.5 text-left">
       <a :href="`#${panel.footer.href}`" class="shrink-0">
         <img
@@ -185,3 +185,64 @@ const setTab = (key) => {
     </div>
   </article>
 </template>
+
+<style scoped>
+/* UI modification: Unifydata card, tab, and interaction styling while preserving tab click bindings. */
+.workspace-unify-card {
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  padding: 20px !important;
+}
+
+.workspace-unify-card > div {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.workspace-unify-card :deep(.text-gray-900) {
+  color: #151921 !important;
+}
+
+.workspace-unify-card :deep(.text-gray-500),
+.workspace-unify-card :deep(.text-gray-400) {
+  color: #666666 !important;
+}
+
+.workspace-unify-card :deep([role="tablist"]) {
+  gap: 18px !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.workspace-unify-card :deep([role="tab"]) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #666666 !important;
+  padding: 8px 0 10px !important;
+}
+
+.workspace-unify-card :deep([role="tab"][aria-selected="true"]) {
+  color: #151921 !important;
+  font-weight: 600 !important;
+}
+
+.workspace-unify-card :deep([role="tab"][aria-selected="true"] span:last-child) {
+  background: #6082f7 !important;
+}
+
+.workspace-unify-card :deep(.rounded-xl) {
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.workspace-unify-card :deep(.bg-sky-100),
+.workspace-unify-card :deep(.bg-orange-100) {
+  background: #6082f7 !important;
+  color: #fff !important;
+}
+</style>

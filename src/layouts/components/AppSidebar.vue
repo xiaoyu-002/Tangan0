@@ -57,6 +57,16 @@ const desktopTextClass = (item) => [
 
   <div class="app-sidebar-desktop">
     <div class="app-sidebar-desktop-panel">
+      <!-- UI modification: bottom user information block, presentational only. -->
+      <div class="app-sidebar-user">
+        <div class="app-sidebar-user-avatar">U</div>
+        <div class="app-sidebar-user-copy">
+          <span class="app-sidebar-user-name">User</span>
+          <span class="app-sidebar-user-role">Workspace</span>
+        </div>
+      </div>
+
+      <!-- UI modification: existing menu entries keep their original href/data/class bindings. -->
       <nav class="app-sidebar-desktop-nav">
         <template v-for="item in primaryNav" :key="item.module">
           <a
@@ -77,6 +87,7 @@ const desktopTextClass = (item) => [
           <div v-if="item.breakAfter" class="app-sidebar-break"></div>
         </template>
       </nav>
+      <!-- UI modification: Unifydata-style logo placement; original logo href is preserved. -->
       <a class="app-sidebar-home-link" href="#/workspace">
         <img alt="思燕智选" loading="lazy" width="36" height="36" decoding="async" class="app-sidebar-home-logo" style="color: transparent" :src="logoSrc" />
       </a>
@@ -193,39 +204,46 @@ const desktopTextClass = (item) => [
   flex: 0 0 auto;
 }
 
+/* UI modification: Unifydata-style dark left sidebar with 220px width. */
 .app-sidebar-desktop-panel {
   display: flex;
-  width: 68px;
+  width: 220px;
   height: 100%;
   flex-direction: column;
-  align-items: center;
-  border-right: 1px solid rgba(243, 244, 246, 0.6);
-  background: #fff;
-  padding: 12px 0;
+  align-items: stretch;
+  border-right: 0;
+  background: #151921;
+  padding: 24px 16px 18px;
 }
 
 .app-sidebar-desktop-nav {
+  order: 2;
   display: flex;
   width: 100%;
   flex: 1 1 auto;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  padding: 0 10px;
+  align-items: stretch;
+  gap: 8px;
+  padding: 28px 0 0;
 }
 
 .app-sidebar-item {
   position: relative;
   display: flex;
+  min-height: 44px;
   width: 100%;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  color: inherit;
+  gap: 12px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.66);
+  padding: 0 12px;
   text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 .app-sidebar-item.is-featured {
-  margin: 2px 0 1px;
+  margin: 0;
 }
 
 .app-sidebar-icon,
@@ -236,128 +254,115 @@ const desktopTextClass = (item) => [
 .app-sidebar-icon {
   position: relative;
   display: flex;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
-  color: #6b7280;
+  border-radius: 8px;
+  color: inherit;
 }
 
 .app-sidebar-item:hover .app-sidebar-icon {
-  color: #374151;
-  background: #f9fafb;
-  transform: translateY(-1px);
+  color: #fff;
+  background: transparent;
+  transform: none;
 }
 
 .app-sidebar-item.is-featured .app-sidebar-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.34), transparent 28%),
-    linear-gradient(135deg, #4c53f5, #8b5cf6);
-  box-shadow:
-    0 16px 34px rgba(76, 83, 245, 0.3),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
 }
 
 .app-sidebar-item.is-featured:hover .app-sidebar-icon {
   color: #fff;
-  background:
-    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.42), transparent 30%),
-    linear-gradient(135deg, #3f46e8, #7c3aed);
-  box-shadow:
-    0 18px 40px rgba(76, 83, 245, 0.38),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+  background: transparent;
+  box-shadow: none;
 }
 
 .app-sidebar-icon.is-active {
-  color: #4c53f5;
-  background: rgba(76, 83, 245, 0.1);
-  transform: translateY(-1px) scale(1.04);
-  box-shadow: 0 8px 18px rgba(76, 83, 245, 0.12);
+  color: #fff;
+  background: transparent;
+  transform: none;
+  box-shadow: none;
 }
 
 .app-sidebar-icon.is-featured.is-active {
   color: #fff;
-  background:
-    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.42), transparent 30%),
-    linear-gradient(135deg, #4c53f5, #8b5cf6);
-  box-shadow:
-    0 20px 44px rgba(76, 83, 245, 0.42),
-    0 0 0 5px rgba(76, 83, 245, 0.1);
+  background: transparent;
+  box-shadow: none;
 }
 
 .app-sidebar-desktop-icon {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 }
 
 .app-sidebar-text {
-  color: #4b5563;
-  font-size: 10px;
+  color: inherit;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
 .app-sidebar-text.is-active {
-  color: #4c53f5;
+  color: #fff;
   font-weight: 600;
-  transform: translateY(1px);
+  transform: none;
 }
 
 .app-sidebar-text.is-featured {
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  color: #4c53f5;
-  font-weight: 800;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  color: inherit;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 .app-sidebar-text.is-featured.is-active {
-  color: #4c53f5;
+  color: #fff;
 }
 
 .app-sidebar-feature-badge {
   position: absolute;
-  right: -8px;
-  top: 5px;
+  right: 12px;
+  top: 50%;
   display: inline-flex;
   min-width: 19px;
   height: 16px;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #f97316;
+  background: #6082f7;
   color: #fff;
   font-size: 8px;
   font-weight: 900;
   line-height: 1;
-  box-shadow:
-    0 8px 16px rgba(249, 115, 22, 0.26),
-    0 0 0 2px #fff;
+  box-shadow: none;
+  transform: translateY(-50%);
 }
 
 .app-sidebar-active-rail {
   position: absolute;
-  left: -10px;
+  left: 0;
   top: 50%;
-  width: 3px;
+  width: 4px;
   height: 20px;
   border-radius: 0 999px 999px 0;
-  background: #4c53f5;
+  background: #6082f7;
   opacity: 0;
   transform: translate(-6px, -50%) scaleY(0.58);
   transition: opacity 220ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .app-sidebar-item.is-featured .app-sidebar-active-rail {
-  background: linear-gradient(180deg, #4c53f5, #8b5cf6);
+  background: #6082f7;
 }
 
 .app-sidebar-active-rail.is-active {
@@ -366,23 +371,85 @@ const desktopTextClass = (item) => [
 }
 
 .app-sidebar-break {
-  width: 28px;
+  width: 100%;
   height: 1px;
-  margin: 10px 0;
-  background: #e5e7eb;
+  margin: 10px 0 6px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .app-sidebar-home-link {
   display: flex;
+  order: 1;
   flex: 0 0 auto;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
+  justify-content: flex-start;
+  margin-bottom: 0;
+  padding: 0 8px;
 }
 
 .app-sidebar-home-logo {
-  width: 36px;
-  height: 36px;
+  width: auto;
+  height: 34px;
+  filter: brightness(0) invert(1);
+}
+
+.app-sidebar-item:hover,
+.app-sidebar-item.is-active {
+  color: #fff;
+  background: rgba(96, 130, 247, 0.16);
+}
+
+/* UI modification: bottom user-info visual treatment without changing navigation logic. */
+.app-sidebar-user {
+  order: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 12px;
+}
+
+.app-sidebar-user-avatar {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #6082f7;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.app-sidebar-user-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.app-sidebar-user-name {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.app-sidebar-user-role {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 11px;
+}
+
+.app-sidebar-desktop-panel::after {
+  content: none;
+  display: none;
+}
+
+.app-sidebar-desktop-panel::before {
+  content: none;
+  display: none;
 }
 
 @media (max-width: 767px) {

@@ -74,7 +74,7 @@ const buildAreaPath = (values, width = 100, height = 40) => {
 
 <template>
   <article
-    class="rounded-2xl border shadow-sm p-4 2xl:p-5 4xl:p-6 flex flex-col"
+    class="workspace-unify-card rounded-2xl border shadow-sm p-4 2xl:p-5 4xl:p-6 flex flex-col"
     :class="tone.card"
   >
     <div class="flex items-center justify-between self-stretch pb-2 mb-2" :class="tone.border">
@@ -183,3 +183,34 @@ const buildAreaPath = (values, width = 100, height = 40) => {
     </div>
   </article>
 </template>
+
+<style scoped>
+/* UI modification: Unifydata card palette and typography. */
+.workspace-unify-card {
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  padding: 20px !important;
+}
+
+.workspace-unify-card :deep(a) {
+  color: #151921;
+}
+
+.workspace-unify-card :deep(.text-\[13px\]) {
+  color: #151921 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.workspace-unify-card :deep(.tabular-nums) {
+  color: #151921 !important;
+  font-weight: 700 !important;
+}
+
+.workspace-unify-card :deep(.text-gray-500),
+.workspace-unify-card :deep(.text-gray-400) {
+  color: #666666 !important;
+}
+</style>
