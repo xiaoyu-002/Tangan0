@@ -233,11 +233,8 @@ onBeforeUnmount(clearPendingTimers)
     <main class="login-shell">
       <section class="hero-panel" aria-label="产品介绍">
         <div class="hero-copy">
-          <h1>
-            智选
-            <span>只为你的成功。</span>
-          </h1>
-          <p>把机会、内容和增长放进同一个入口</p>
+          <h1>智选，只为你的成功。</h1>
+          <p class="hero-subcopy-en">Curated intelligence for your next win.</p>
         </div>
 
         <div class="feature-grid">
@@ -1565,10 +1562,12 @@ onBeforeUnmount(clearPendingTimers)
 .login-shell {
   width: min(1320px, calc(100% - 56px));
   min-height: calc(100dvh - 92px);
-  grid-template-columns: 1fr;
-  align-items: end;
-  gap: 0;
-  padding: 0 0 54px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: 0 0 24px;
 }
 
 .hero-panel {
@@ -1576,27 +1575,18 @@ onBeforeUnmount(clearPendingTimers)
   align-self: center;
   justify-self: center;
   text-align: center;
-  transform: translateY(24px);
+  transform: translateY(0);
 }
 
 .hero-copy h1 {
   max-width: none;
   color: #fff;
-  font-size: 86px;
-  line-height: 0.98;
+  font-size: clamp(68px, 7.2vw, 118px);
+  line-height: 0.94;
   letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
   text-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
-}
-
-.hero-copy h1 span {
-  display: block;
-  margin-top: 14px;
-  background: none;
-  color: #fff;
-  font-size: 34px;
-  font-weight: 700;
-  text-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
-  animation: none;
 }
 
 .hero-copy p {
@@ -1605,10 +1595,20 @@ onBeforeUnmount(clearPendingTimers)
   font-size: 15px;
 }
 
+.hero-subcopy-en {
+  margin-top: 10px !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 18px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .search-auth-card {
-  align-self: end;
+  align-self: start;
   justify-self: center;
-  width: min(920px, 100%);
+  width: min(1120px, 100%);
   min-height: 0;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.42);
@@ -1617,7 +1617,7 @@ onBeforeUnmount(clearPendingTimers)
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(18px);
   display: grid;
-  grid-template-columns: 142px minmax(0, 1fr);
+  grid-template-columns: 156px minmax(0, 1fr);
   gap: 10px;
   overflow: visible;
 }
@@ -1786,6 +1786,64 @@ onBeforeUnmount(clearPendingTimers)
   display: none;
 }
 
+/* Product feature cards below the auth bar */
+.hero-panel {
+  display: contents;
+}
+
+.hero-copy {
+  grid-row: 1;
+  justify-self: center;
+  text-align: center;
+  transform: translateY(-18px);
+}
+
+.search-auth-card {
+  grid-row: 2;
+}
+
+.feature-grid {
+  grid-row: 3;
+  display: grid;
+  width: min(1120px, 100%);
+  justify-self: center;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.feature-card {
+  min-height: 96px;
+  padding: 14px;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.feature-card:hover {
+  border-color: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+.feature-icon {
+  margin-bottom: 8px;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.feature-card h2 {
+  color: #fff;
+  font-size: 13px;
+}
+
+.feature-card p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1808,15 +1866,16 @@ onBeforeUnmount(clearPendingTimers)
   }
 
   .hero-copy h1 {
-    font-size: 60px;
+    font-size: clamp(42px, 9vw, 64px);
+    white-space: normal;
   }
 
-  .hero-copy h1 span {
-    font-size: 26px;
+  .hero-subcopy-en {
+    font-size: 14px !important;
   }
 
   .search-auth-card {
-    width: min(680px, 100%);
+    width: min(760px, 100%);
     border-radius: 28px;
     grid-template-columns: 1fr;
   }
