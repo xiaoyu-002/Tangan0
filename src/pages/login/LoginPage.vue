@@ -218,6 +218,7 @@ onBeforeUnmount(clearPendingTimers)
       <span class="login-bg-slide login-bg-slide-2"></span>
       <span class="login-bg-slide login-bg-slide-3"></span>
       <span class="login-bg-slide login-bg-slide-4"></span>
+      <span class="login-bg-slide login-bg-slide-5"></span>
     </div>
     <div class="login-bg-overlay" aria-hidden="true"></div>
     <div class="login-glow login-glow-left"></div>
@@ -396,6 +397,11 @@ onBeforeUnmount(clearPendingTimers)
 }
 
 .login-bg-carousel,
+.login-bg-slide-5 {
+  background-image: url('/assets/login-carousel/login-hero-05-future-retail-network.png');
+  animation-delay: 28s;
+}
+
 .login-bg-overlay {
   position: absolute;
   inset: 0;
@@ -415,7 +421,7 @@ onBeforeUnmount(clearPendingTimers)
   background-size: cover;
   opacity: 0;
   transform: scale(1.04);
-  animation: login-bg-crossfade 28s ease-in-out infinite;
+  animation: login-bg-crossfade 35s ease-in-out infinite;
   will-change: opacity, transform;
 }
 
@@ -427,22 +433,22 @@ onBeforeUnmount(clearPendingTimers)
 }
 
 .login-bg-slide-1 {
-  background-image: url('/assets/storyboards/7638139108254059789/shot_3_01-03dae8.jpg');
+  background-image: url('/assets/login-carousel/login-hero-01-tech-grid-blue.png');
   animation-delay: 0s;
 }
 
 .login-bg-slide-2 {
-  background-image: url('/assets/storyboards/7637993570737065247/shot_4_00-157b70.jpg');
+  background-image: url('/assets/login-carousel/login-hero-02-business-skyline.png');
   animation-delay: 7s;
 }
 
 .login-bg-slide-3 {
-  background-image: url('/assets/storyboards/7638368345523326222/shot_3_00-113ab9.jpg');
+  background-image: url('/assets/login-carousel/login-hero-03-data-command-center.png');
   animation-delay: 14s;
 }
 
 .login-bg-slide-4 {
-  background-image: url('/assets/storyboards/7638339931768638750/shot_5_00-25935f.jpg');
+  background-image: url('/assets/login-carousel/login-hero-04-premium-boardroom.png');
   animation-delay: 21s;
 }
 
@@ -1808,13 +1814,13 @@ onBeforeUnmount(clearPendingTimers)
   width: min(1120px, 100%);
   justify-self: center;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 2px;
+  gap: 14px;
+  margin-top: 22px;
 }
 
 .feature-card {
-  min-height: 96px;
-  padding: 14px;
+  min-height: 116px;
+  padding: 18px;
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.16);
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.16);
@@ -1827,7 +1833,7 @@ onBeforeUnmount(clearPendingTimers)
 }
 
 .feature-icon {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
@@ -1835,13 +1841,13 @@ onBeforeUnmount(clearPendingTimers)
 
 .feature-card h2 {
   color: #fff;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .feature-card p {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 11px;
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 13px;
+  line-height: 1.58;
 }
 
 @media (prefers-reduced-motion: reduce) {
