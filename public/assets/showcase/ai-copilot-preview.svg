@@ -1,0 +1,105 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AI Copilot product preview</title>
+  <desc id="desc">A glassmorphism data workspace with an AI recommendation panel, signal cards, charts, and campaign tasks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF4FF"/>
+      <stop offset="0.48" stop-color="#F5ECFF"/>
+      <stop offset="1" stop-color="#F0FFE3"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="284" y1="60" x2="898" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.56"/>
+    </linearGradient>
+    <linearGradient id="darkPanel" x1="64" y1="44" x2="248" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#151921"/>
+      <stop offset="1" stop-color="#232A36"/>
+    </linearGradient>
+    <linearGradient id="bluePurple" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6082F7"/>
+      <stop offset="1" stop-color="#E2BBFF"/>
+    </linearGradient>
+    <linearGradient id="greenBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#DBFFBA"/>
+      <stop offset="1" stop-color="#BFD2FF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#151921" flood-opacity="0.14"/>
+    </filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <circle cx="792" cy="78" r="158" fill="#6082F7" opacity="0.13" filter="url(#glow)"/>
+  <circle cx="204" cy="456" r="132" fill="#DBFFBA" opacity="0.2" filter="url(#glow)"/>
+  <path d="M110 410C238 302 374 300 486 234C596 170 716 96 858 132" stroke="#6082F7" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M126 94C256 138 360 158 486 142C622 124 720 80 862 104" stroke="#E2BBFF" stroke-opacity="0.28" stroke-width="2"/>
+
+  <rect x="54" y="42" width="852" height="456" rx="12" fill="url(#panel)" stroke="#FFFFFF" stroke-opacity="0.72" filter="url(#softShadow)"/>
+  <rect x="54" y="42" width="188" height="456" rx="12" fill="url(#darkPanel)"/>
+  <path d="M242 42H254V498H242V42Z" fill="#FFFFFF" fill-opacity="0.72"/>
+
+  <rect x="84" y="76" width="42" height="42" rx="12" fill="url(#bluePurple)"/>
+  <circle cx="105" cy="97" r="7" fill="#DBFFBA"/>
+  <rect x="84" y="150" width="120" height="34" rx="10" fill="#6082F7"/>
+  <rect x="84" y="204" width="120" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.13"/>
+  <rect x="84" y="258" width="120" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.13"/>
+  <rect x="84" y="312" width="120" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.13"/>
+  <rect x="84" y="420" width="120" height="42" rx="12" fill="#FFFFFF" fill-opacity="0.09"/>
+  <circle cx="105" cy="441" r="10" fill="#E2BBFF"/>
+  <rect x="124" y="432" width="54" height="6" rx="3" fill="#FFFFFF" fill-opacity="0.32"/>
+  <rect x="124" y="446" width="36" height="6" rx="3" fill="#FFFFFF" fill-opacity="0.18"/>
+
+  <rect x="286" y="76" width="236" height="34" rx="12" fill="#151921" fill-opacity="0.08"/>
+  <circle cx="304" cy="93" r="7" stroke="#6082F7" stroke-width="3" opacity="0.52"/>
+  <rect x="324" y="89" width="150" height="8" rx="4" fill="#151921" fill-opacity="0.12"/>
+  <circle cx="808" cy="93" r="13" fill="#6082F7"/>
+  <circle cx="848" cy="93" r="13" fill="#E2BBFF"/>
+
+  <rect x="286" y="138" width="170" height="100" rx="12" fill="#FFFFFF" fill-opacity="0.76" stroke="#FFFFFF" stroke-opacity="0.72"/>
+  <rect x="310" y="160" width="74" height="8" rx="4" fill="#151921" fill-opacity="0.16"/>
+  <rect x="310" y="187" width="108" height="14" rx="7" fill="#151921" fill-opacity="0.26"/>
+  <path d="M310 218C328 204 344 212 362 198C382 182 402 206 430 184" stroke="#6082F7" stroke-width="4" stroke-linecap="round"/>
+
+  <rect x="478" y="138" width="170" height="100" rx="12" fill="#FFFFFF" fill-opacity="0.68" stroke="#FFFFFF" stroke-opacity="0.72"/>
+  <rect x="502" y="160" width="86" height="8" rx="4" fill="#151921" fill-opacity="0.14"/>
+  <rect x="502" y="187" width="92" height="14" rx="7" fill="#151921" fill-opacity="0.22"/>
+  <rect x="502" y="218" width="112" height="8" rx="4" fill="#DBFFBA"/>
+
+  <rect x="286" y="260" width="362" height="190" rx="12" fill="#FFFFFF" fill-opacity="0.76" stroke="#FFFFFF" stroke-opacity="0.72"/>
+  <rect x="310" y="284" width="118" height="8" rx="4" fill="#151921" fill-opacity="0.14"/>
+  <path d="M312 406C356 348 400 382 446 318C488 260 534 360 610 300" stroke="#6082F7" stroke-width="5" stroke-linecap="round"/>
+  <path d="M312 394C360 372 392 402 444 366C490 334 536 378 610 342" stroke="#E2BBFF" stroke-width="5" stroke-linecap="round" opacity="0.88"/>
+  <path d="M312 424C356 414 396 424 440 404C486 382 538 430 610 386" stroke="#DBFFBA" stroke-width="5" stroke-linecap="round"/>
+  <line x1="312" y1="332" x2="616" y2="332" stroke="#151921" stroke-opacity="0.08"/>
+  <line x1="312" y1="376" x2="616" y2="376" stroke="#151921" stroke-opacity="0.08"/>
+  <line x1="312" y1="420" x2="616" y2="420" stroke="#151921" stroke-opacity="0.08"/>
+
+  <rect x="674" y="138" width="190" height="312" rx="12" fill="#151921" fill-opacity="0.9" filter="url(#softShadow)"/>
+  <rect x="698" y="164" width="92" height="8" rx="4" fill="#DBFFBA"/>
+  <text x="698" y="196" fill="#FFFFFF" fill-opacity="0.92" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">AI Copilot</text>
+  <text x="698" y="222" fill="#FFFFFF" fill-opacity="0.58" font-family="Inter, Arial, sans-serif" font-size="13">Next best actions</text>
+
+  <rect x="698" y="246" width="142" height="52" rx="12" fill="#FFFFFF" fill-opacity="0.12"/>
+  <rect x="716" y="263" width="92" height="7" rx="4" fill="#FFFFFF" fill-opacity="0.5"/>
+  <rect x="716" y="280" width="58" height="7" rx="4" fill="#FFFFFF" fill-opacity="0.26"/>
+
+  <rect x="720" y="316" width="120" height="48" rx="12" fill="#6082F7" fill-opacity="0.72"/>
+  <rect x="738" y="332" width="70" height="7" rx="4" fill="#FFFFFF" fill-opacity="0.78"/>
+  <rect x="738" y="348" width="42" height="7" rx="4" fill="#FFFFFF" fill-opacity="0.42"/>
+
+  <rect x="698" y="382" width="142" height="38" rx="12" fill="#FFFFFF" fill-opacity="0.1"/>
+  <rect x="716" y="398" width="84" height="7" rx="4" fill="#FFFFFF" fill-opacity="0.36"/>
+  <circle cx="840" cy="170" r="28" fill="#6082F7" opacity="0.2"/>
+  <circle cx="840" cy="170" r="12" fill="#6082F7"/>
+  <circle cx="840" cy="170" r="5" fill="#DBFFBA"/>
+
+  <circle cx="672" cy="302" r="6" fill="#DBFFBA"/>
+  <path d="M648 304C660 304 662 304 672 302" stroke="#DBFFBA" stroke-width="2" stroke-linecap="round"/>
+</svg>
