@@ -216,7 +216,7 @@ onBeforeUnmount(() => {
             <path d="M4 19h16"></path>
           </svg>
         </button>
-        <img alt="思燕智选" width="28" height="28" decoding="async" class="ml-2 h-5 w-auto" src="/assets/icons/siyan-logo.png">
+        <img alt="糖安罗盘" width="28" height="28" decoding="async" class="ml-2 h-5 w-auto" src="/assets/icons/tangan-logo.png">
         <div class="ml-auto shrink-0"></div>
       </div>
 

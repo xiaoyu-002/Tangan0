@@ -270,7 +270,7 @@ onBeforeUnmount(() => {
           <img class="floating-ai-avatar" :src="agent.avatar" :alt="agent.name">
           <div class="floating-ai-title">
             <strong>{{ agent.name }}</strong>
-            <span>Siyan-agent-v5</span>
+            <span>Tangan-agent-v5</span>
           </div>
           <button
             v-if="isSending"

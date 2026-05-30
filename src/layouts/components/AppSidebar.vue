@@ -36,7 +36,7 @@ const desktopTextClass = (item) => [
   <div class="app-sidebar-mobile-overlay"></div>
   <div class="app-sidebar-mobile-drawer">
     <div class="app-sidebar-mobile-logo-row">
-      <img alt="思燕智选" loading="lazy" width="88" height="26" decoding="async" class="app-sidebar-mobile-logo" style="color: transparent" :srcset="logoSrc + ' 1x, ' + logoSrc + ' 2x'" :src="logoSrc" />
+      <img alt="糖安罗盘" loading="lazy" width="88" height="26" decoding="async" class="app-sidebar-mobile-logo" style="color: transparent" :srcset="logoSrc + ' 1x, ' + logoSrc + ' 2x'" :src="logoSrc" />
     </div>
     <nav class="app-sidebar-mobile-nav">
       <ul class="app-sidebar-mobile-list">
@@ -89,7 +89,7 @@ const desktopTextClass = (item) => [
       </nav>
       <!-- UI modification: Unifydata-style logo placement; original logo href is preserved. -->
       <a class="app-sidebar-home-link" href="#/workspace">
-        <img alt="思燕智选" loading="lazy" width="36" height="36" decoding="async" class="app-sidebar-home-logo" style="color: transparent" :src="logoSrc" />
+        <img alt="糖安罗盘" loading="lazy" width="36" height="36" decoding="async" class="app-sidebar-home-logo" style="color: transparent" :src="logoSrc" />
       </a>
     </div>
   </div>

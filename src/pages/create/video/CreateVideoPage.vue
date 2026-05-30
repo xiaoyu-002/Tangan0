@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue'
 import {
-  SIYAN_VIDEO_DISPLAY_MODEL,
+  TANGAN_VIDEO_DISPLAY_MODEL,
   createAireiterTaskId,
   extractAireiterVideoResult,
   pollAireiterTask,
@@ -10,7 +10,7 @@ import {
 import CreatePageShell from '../components/CreatePageShell.vue'
 import { makeCreationTitle, saveCreation, updateCreation } from '../creationStore'
 
-const model = ref(SIYAN_VIDEO_DISPLAY_MODEL)
+const model = ref(TANGAN_VIDEO_DISPLAY_MODEL)
 const prompt = ref('为一款 TikTok Shop 便携式榨汁杯生成 8 秒竖屏短视频：前三秒展示通勤没时间吃水果的痛点，中段展示榨汁和清洗，结尾突出便携、USB-C 充电和适合健身人群。')
 const ratio = ref('9:16')
 const duration = ref(8)
@@ -226,7 +226,7 @@ onBeforeUnmount(() => {
 <template>
   <CreatePageShell
     title="视频创作"
-    description="使用 Siyan-video-v3-flash 生成可投放短视频。"
+    description="使用 Tangan-video-v3-flash 生成可投放短视频。"
   >
     <form class="video-workbench" @submit.prevent="generateVideo">
       <section class="video-panel">

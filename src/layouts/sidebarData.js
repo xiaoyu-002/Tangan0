@@ -1,4 +1,4 @@
-export const logoSrc = '/assets/icons/siyan-logo.png'
+export const logoSrc = '/assets/icons/tangan-logo.png'
 
 export const primaryNav = [
   { module: 'workspace', label: '工作台', path: '/workspace', icon: 'dashboard', breakAfter: true },

@@ -26,7 +26,7 @@ defineProps({
             <path d="M4 19h16"></path>
           </svg>
         </button>
-        <img src="/assets/icons/siyan-logo.png" alt="出海匠" class="mobile-logo">
+        <img src="/assets/icons/tangan-logo.png" alt="出海匠" class="mobile-logo">
       </div>
 
       <nav class="breadcrumb" aria-label="Breadcrumb">

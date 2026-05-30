@@ -2,7 +2,7 @@ import { backendUrl } from '../../utils/backendApi'
 
 export const AIREITER_API_BASE_URL = backendUrl('/api/video')
 export const AIREITER_SEEDANCE_FAST_MODEL = 'seedance2_fast'
-export const SIYAN_VIDEO_DISPLAY_MODEL = 'SIyan-video-v3-flash'
+export const TANGAN_VIDEO_DISPLAY_MODEL = 'Tangan-video-v3-flash'
 export const AIREITER_DEFAULT_POLL_INTERVAL_MS = 4000
 export const AIREITER_MAX_POLL_ATTEMPTS = 120
 

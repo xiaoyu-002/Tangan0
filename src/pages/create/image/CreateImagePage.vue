@@ -158,7 +158,7 @@ const generateImage = async () => {
         <div class="settings-panel">
           <div class="setting-line">
             <span class="setting-label">模型</span>
-            <span class="model-pill">Siyan-image-v5 · standard</span>
+            <span class="model-pill">Tangan-image-v5 · standard</span>
           </div>
 
           <div class="setting-block">

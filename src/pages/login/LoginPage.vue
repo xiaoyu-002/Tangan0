@@ -2,8 +2,8 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 import AppIcon from '../../components/AppIcon.vue'
 
-const brandName = '思燕智选'
-const brandLogoSrc = '/assets/icons/siyan-logo.png'
+const brandName = '糖安罗盘'
+const brandLogoSrc = '/assets/icons/tangan-logo.png'
 
 const features = [
   {
@@ -59,7 +59,7 @@ const phone = ref('13800138000')
 const code = ref('246810')
 const account = ref('demo@chuhaijiang.com')
 const password = ref('123456')
-const registerName = ref('思燕智选新用户')
+const registerName = ref('糖安罗盘新用户')
 const acceptedPolicy = ref(true)
 const isSubmitting = ref(false)
 const isSendingCode = ref(false)
@@ -234,7 +234,7 @@ onBeforeUnmount(clearPendingTimers)
     <main class="login-shell">
       <section class="hero-panel" aria-label="产品介绍">
         <div class="hero-copy">
-          <h1>智选，只为你的成功。</h1>
+          <h1>糖安罗盘，为你的增长指路。</h1>
           <p class="hero-subcopy-en">Curated intelligence for your next win.</p>
         </div>
 
@@ -376,7 +376,7 @@ onBeforeUnmount(clearPendingTimers)
       </section>
     </main>
 
-    <footer class="login-footer">© 2026 思燕智选</footer>
+    <footer class="login-footer">© 2026 糖安罗盘</footer>
   </div>
 </template>
 

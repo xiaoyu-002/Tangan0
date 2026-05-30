@@ -70,7 +70,7 @@ const productBrief = ref('')
 const referenceInput = ref('')
 const adaptationProduct = ref('')
 const audience = ref('TikTok Shop 美国用户')
-const model = ref("Siyan-agent-v5")
+const model = ref("Tangan-agent-v5")
 const result = ref('')
 const errorMessage = ref('')
 const copyStatus = ref('')
@@ -220,7 +220,7 @@ const generateScript = async () => {
     {
       role: 'system',
       content: [
-        '你是思燕智选的跨境电商短视频脚本策略师，擅长 TikTok Shop 带货内容、爆款结构拆解和拍摄执行。',
+        '你是糖安罗盘的跨境电商短视频脚本策略师，擅长 TikTok Shop 带货内容、爆款结构拆解和拍摄执行。',
         '输出必须具体、可拍、可复用，避免空泛营销词。',
         '不要编造平台数据、销量、功效或用户评价；遇到链接无法读取时，基于用户已输入的信息生成并说明假设。',
       ].join('\n'),
@@ -333,7 +333,7 @@ onBeforeUnmount(() => {
             <path d="M4 19h16"></path>
           </svg>
         </button>
-        <img src="/assets/icons/siyan-logo.png" alt="出海匠" class="mobile-logo">
+        <img src="/assets/icons/tangan-logo.png" alt="出海匠" class="mobile-logo">
       </div>
 
       <nav class="breadcrumb" aria-label="Breadcrumb">
