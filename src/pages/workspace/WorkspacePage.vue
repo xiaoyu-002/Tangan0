@@ -71,7 +71,7 @@ const opportunityPanels = computed(() => activeMarketSnapshot.value.opportunitie
 // UI modification: view-only projections for the Unifydata dashboard layout.
 // These values reuse existing workspace data and do not change API state, events, or business logic.
 const dashboardKpiCards = computed(() => {
-  const displayLabels = ['Visitors', 'Contacts', 'Deals', 'Revenue']
+  const displayLabels = ['访客数', '联系人', '交易数', '收入']
   return performanceCards.value
     .flatMap((card) => (card.metrics || []).map((metric) => ({
       ...metric,
@@ -110,8 +110,8 @@ const dashboardDonutStyle = computed(() => {
   return { background: `conic-gradient(${stops.join(', ')})` }
 })
 
-const getChartPoints = (values = [], width = 320, height = 136) => {
-  if (!Array.isArray(values) || values.length === 0) return ''
+const getChartPointData = (values = [], width = 320, height = 136) => {
+  if (!Array.isArray(values) || values.length === 0) return []
   const min = Math.min(...values)
   const max = Math.max(...values)
   const range = max - min || 1
@@ -121,9 +121,41 @@ const getChartPoints = (values = [], width = 320, height = 136) => {
     .map((value, index) => {
       const x = Math.round(index * step)
       const y = Math.round(height - 12 - ((value - min) / range) * (height - 24))
-      return `${x},${y}`
+      return { x, y, value }
     })
+}
+
+const getChartPoints = (values = [], width = 320, height = 136) => {
+  return getChartPointData(values, width, height)
+    .map((point) => `${point.x},${point.y}`)
     .join(' ')
+}
+
+const getSmoothChartPath = (values = [], width = 320, height = 136) => {
+  const points = getChartPointData(values, width, height)
+  if (points.length === 0) return ''
+  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`
+
+  return points.reduce((path, point, index) => {
+    if (index === 0) return `M ${point.x} ${point.y}`
+
+    const previous = points[index - 1]
+    const controlDistance = (point.x - previous.x) * 0.45
+    const c1x = Math.round(previous.x + controlDistance)
+    const c2x = Math.round(point.x - controlDistance)
+    return `${path} C ${c1x} ${previous.y}, ${c2x} ${point.y}, ${point.x} ${point.y}`
+  }, '')
+}
+
+const getChartAreaPath = (values = [], width = 320, height = 136) => {
+  const points = getChartPointData(values, width, height)
+  const linePath = getSmoothChartPath(values, width, height)
+  if (!linePath || points.length === 0) return ''
+
+  const baseline = height - 8
+  const first = points[0]
+  const last = points[points.length - 1]
+  return `${linePath} L ${last.x} ${baseline} L ${first.x} ${baseline} Z`
 }
 
 const syncActiveMarket = () => {
@@ -220,18 +252,19 @@ onBeforeUnmount(() => {
         <div class="ml-auto shrink-0"></div>
       </div>
 
-      <!-- UI modification: Unifydata-style top title bar with Dashboard title and search box. -->
+      <!-- UI modification: Unifydata 风格顶部标题栏和搜索框。 -->
       <div class="workspace-dashboard-titlebar hidden md:flex items-center px-5 h-full">
         <div class="workspace-dashboard-heading">
-          <h1 class="workspace-dashboard-title">Dashboard</h1>
-          <p class="workspace-dashboard-subtitle">{{ workspaceData?.header?.description }}</p>
+          <!-- UI modification: production-facing workspace title copy. -->
+          <h1 class="workspace-dashboard-title">增长工作台</h1>
+          <p class="workspace-dashboard-subtitle">集中查看市场机会、内容表现、渠道收入与待办任务，快速判断下一步增长动作。</p>
         </div>
         <label class="workspace-dashboard-search">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.3-4.3"></path>
           </svg>
-          <input type="search" aria-label="Search" placeholder="Search" autocomplete="off">
+          <input type="search" aria-label="搜索" placeholder="搜索" autocomplete="off">
         </label>
         <nav aria-label="Breadcrumb" class="workspace-dashboard-breadcrumb min-w-0">
           <ol class="flex items-center gap-1.5 text-sm list-none m-0 p-0">
@@ -252,7 +285,7 @@ onBeforeUnmount(() => {
     <div class="flex-1 relative">
       <div class="pointer-events-none fixed inset-0 z-0" style="background: linear-gradient(135deg, rgba(238,240,254,0.6) 0%, rgba(238,240,254,0) 35%)"></div>
 
-      <div class="workspace-dashboard-container w-full relative z-10 max-w-4xl lg:max-w-6xl 2xl:max-w-8xl 3xl:max-w-9xl 4xl:max-w-10xl mx-auto px-4 md:px-6 2xl:px-8 pb-24">
+      <div class="workspace-dashboard-container w-full relative z-10 px-4 md:px-6 2xl:px-8 pb-24">
         <WorkspaceSkeleton v-if="isLoading && !workspaceData" />
 
         <div v-else-if="loadError && !workspaceData" class="flex min-h-[55vh] items-center justify-center">
@@ -355,7 +388,7 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- UI modification: first row - 4 KPI cards in 2x2 layout, reusing existing metric links and values. -->
-            <section class="workspace-dashboard-kpi-grid" aria-label="Dashboard metrics">
+            <section class="workspace-dashboard-kpi-grid" aria-label="工作台指标">
               <a
                 v-for="metric in dashboardKpiCards"
                 :key="`${metric.sourceTitle}-${metric.label}`"
@@ -371,28 +404,52 @@ onBeforeUnmount(() => {
               </a>
             </section>
 
-            <!-- UI modification: second row - Deals & Revenue line chart and Top Revenue Channels donut chart. -->
+            <!-- UI modification: 第二行交易收入折线图和主要收入渠道环形图。 -->
             <section class="workspace-dashboard-chart-grid">
               <article class="workspace-dashboard-card workspace-dashboard-line-card">
                 <div class="workspace-dashboard-card-header">
                   <div>
-                    <h2>Deals &amp; Revenue</h2>
+                    <h2>交易与收入</h2>
                     <p>{{ dashboardLineCard?.title }}</p>
                   </div>
-                  <a v-if="dashboardLineCard" :href="`#${dashboardLineCard.href}`" class="workspace-dashboard-link">View</a>
+                  <a v-if="dashboardLineCard" :href="`#${dashboardLineCard.href}`" class="workspace-dashboard-link">查看</a>
                 </div>
                 <svg class="workspace-dashboard-line-chart" viewBox="0 0 320 136" preserveAspectRatio="none" aria-hidden="true">
-                  <line x1="0" y1="112" x2="320" y2="112"></line>
-                  <line x1="0" y1="76" x2="320" y2="76"></line>
-                  <line x1="0" y1="40" x2="320" y2="40"></line>
-                  <polyline
-                    :points="getChartPoints(dashboardLineCard?.chart?.values || [])"
-                    fill="none"
-                    stroke="#6082F7"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></polyline>
+                  <defs>
+                    <linearGradient id="workspaceLineArea" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#6082F7" stop-opacity="0.24"></stop>
+                      <stop offset="58%" stop-color="#E2BBFF" stop-opacity="0.12"></stop>
+                      <stop offset="100%" stop-color="#6082F7" stop-opacity="0"></stop>
+                    </linearGradient>
+                    <linearGradient id="workspaceLineStroke" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%" stop-color="#6082F7"></stop>
+                      <stop offset="62%" stop-color="#7C9AFB"></stop>
+                      <stop offset="100%" stop-color="#6082F7"></stop>
+                    </linearGradient>
+                    <filter id="workspaceLineGlow" x="-8%" y="-35%" width="116%" height="170%">
+                      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#6082F7" flood-opacity="0.2"></feDropShadow>
+                    </filter>
+                  </defs>
+                  <line class="workspace-dashboard-grid-line" x1="0" y1="112" x2="320" y2="112"></line>
+                  <line class="workspace-dashboard-grid-line" x1="0" y1="76" x2="320" y2="76"></line>
+                  <line class="workspace-dashboard-grid-line" x1="0" y1="40" x2="320" y2="40"></line>
+                  <path
+                    class="workspace-dashboard-line-area"
+                    :d="getChartAreaPath(dashboardLineCard?.chart?.values || [])"
+                  ></path>
+                  <path
+                    class="workspace-dashboard-line-path"
+                    :d="getSmoothChartPath(dashboardLineCard?.chart?.values || [])"
+                  ></path>
+                  <circle
+                    v-for="(point, index) in getChartPointData(dashboardLineCard?.chart?.values || [])"
+                    :key="`${point.x}-${point.y}-${index}`"
+                    class="workspace-dashboard-line-dot"
+                    :class="{ 'is-last': index === getChartPointData(dashboardLineCard?.chart?.values || []).length - 1 }"
+                    :cx="point.x"
+                    :cy="point.y"
+                    :r="index === getChartPointData(dashboardLineCard?.chart?.values || []).length - 1 ? 4 : 2.8"
+                  ></circle>
                 </svg>
                 <div class="workspace-dashboard-chart-caption" v-if="dashboardLineCard">
                   <span>{{ dashboardLineCard.chart.minLabel }}</span>
@@ -414,8 +471,8 @@ onBeforeUnmount(() => {
               <article class="workspace-dashboard-card workspace-dashboard-donut-card">
                 <div class="workspace-dashboard-card-header">
                   <div>
-                    <h2>Top Revenue Channels</h2>
-                    <p>{{ activeMarket.label }} / {{ activeMarket.code }}</p>
+                    <h2>主要收入渠道</h2>
+                    <p>{{ activeMarket.label }}</p>
                   </div>
                 </div>
                 <div class="workspace-dashboard-donut-wrap">
@@ -452,24 +509,24 @@ onBeforeUnmount(() => {
               </article>
             </section>
 
-            <!-- UI modification: third row - full-width Campaign Performance table using existing task data and links. -->
+            <!-- UI modification: 第三行全宽活动表现表格，复用原有任务数据和链接。 -->
             <section v-if="support" class="workspace-dashboard-card workspace-dashboard-table-card">
               <div class="workspace-dashboard-card-header">
                 <div>
-                  <h2>Campaign Performance</h2>
+                  <h2>活动表现</h2>
                   <p>{{ support.tasks.title }}</p>
                 </div>
-                <a :href="`#${support.tasks.href}`" class="workspace-dashboard-link">View all</a>
+                <a :href="`#${support.tasks.href}`" class="workspace-dashboard-link">查看全部</a>
               </div>
               <div class="workspace-dashboard-table-wrap">
                 <table class="workspace-dashboard-table">
                   <thead>
                     <tr>
-                      <th>Campaign</th>
-                      <th>Agent</th>
-                      <th>Status</th>
-                      <th>Progress</th>
-                      <th>Due</th>
+                      <th>活动</th>
+                      <th>负责人</th>
+                      <th>状态</th>
+                      <th>进度</th>
+                      <th>截止时间</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -693,9 +750,12 @@ onBeforeUnmount(() => {
 }
 
 .workspace-dashboard-container {
-  max-width: 1180px !important;
-  padding-right: 32px !important;
-  padding-left: 32px !important;
+  /* UI modification: make the dashboard display area use the full main content width. */
+  max-width: none !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-right: clamp(24px, 2.6vw, 48px) !important;
+  padding-left: clamp(24px, 2.6vw, 48px) !important;
 }
 
 .workspace-dashboard-page :deep(.workspace-dashboard-card),
@@ -812,7 +872,7 @@ onBeforeUnmount(() => {
 
 .workspace-dashboard-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -859,7 +919,7 @@ onBeforeUnmount(() => {
 
 .workspace-dashboard-chart-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.85fr);
   gap: 24px;
 }
 
@@ -909,9 +969,35 @@ onBeforeUnmount(() => {
   overflow: visible;
 }
 
-.workspace-dashboard-line-chart line {
-  stroke: #eef0f4;
+.workspace-dashboard-grid-line {
+  stroke: #e9edf5;
   stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+.workspace-dashboard-line-area {
+  fill: url("#workspaceLineArea");
+}
+
+.workspace-dashboard-line-path {
+  fill: none;
+  filter: url("#workspaceLineGlow");
+  stroke: url("#workspaceLineStroke");
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4.5;
+}
+
+.workspace-dashboard-line-dot {
+  fill: #ffffff;
+  stroke: #6082f7;
+  stroke-width: 2;
+}
+
+.workspace-dashboard-line-dot.is-last {
+  fill: #6082f7;
+  stroke: #ffffff;
+  stroke-width: 2.5;
 }
 
 .workspace-dashboard-chart-caption {
@@ -1060,7 +1146,7 @@ onBeforeUnmount(() => {
 
 .workspace-dashboard-table {
   width: 100%;
-  min-width: 720px;
+  min-width: 860px;
   border-collapse: collapse;
   color: #333333;
   font-size: 13px;
@@ -1120,7 +1206,7 @@ onBeforeUnmount(() => {
 .workspace-dashboard-opportunity-grid,
 .workspace-dashboard-support-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -1193,6 +1279,17 @@ onBeforeUnmount(() => {
 .workspace-dashboard-tabs button[class*="bg-primary"] {
   background: #6082f7 !important;
   color: #fff !important;
+}
+
+@media (max-width: 1280px) {
+  .workspace-dashboard-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workspace-dashboard-opportunity-grid,
+  .workspace-dashboard-support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 1024px) {

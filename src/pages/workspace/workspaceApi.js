@@ -5,7 +5,7 @@ export const workspacePageData = {
   header: {
     badge: '快讯',
     title: '工作台总览',
-    description: '这里默认模拟已登录状态，把市场、选品、创作、社媒、资产和任务数据一次性展示出来。',
+    description: '汇总市场、选品、创作、社媒、资产和任务进展，帮助团队快速识别增长机会。',
     news: [
       'TikTok Shop 美国区父亲节备货进入最后两周，工具礼品与户外降温品类热度上升。',
       'Shopify 独立站广告 CPC 较上周下降 3.2%，适合测试低预算素材组合。',

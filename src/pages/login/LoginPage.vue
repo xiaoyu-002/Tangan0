@@ -73,8 +73,8 @@ const beanCleanupCallbacks = new Set()
 const isRegister = computed(() => authMode.value === 'register')
 const authPanelKey = computed(() => `${authMode.value}-${loginMethod.value}`)
 const submitText = computed(() => {
-  if (isSubmitting.value) return isRegister.value ? 'Creating account...' : 'Logging in...'
-  return isRegister.value ? 'Sign Up' : 'Log in'
+  if (isSubmitting.value) return isRegister.value ? '正在创建账号...' : '正在登录...'
+  return isRegister.value ? '注册' : '登录'
 })
 const codeButtonText = computed(() => {
   if (isSendingCode.value) return '发送中...'
@@ -240,6 +240,61 @@ const trackBeanEyes = (bean, targetX, targetY) => {
   })
 }
 
+// UI modification: mouse-follow stretch that pins each character base while the top is pulled.
+const trackFigmaIllustration = (figmaBeans, targetX, targetY) => {
+  figmaBeans.forEach((bean, index) => {
+    const rect = bean.getBoundingClientRect()
+    const anchorX = rect.left + rect.width / 2
+    const anchorY = rect.bottom - rect.height * 0.08
+    const pullX = Math.max(-1, Math.min(1, (targetX - anchorX) / 300))
+    const pullY = Math.max(-1, Math.min(1, (targetY - anchorY) / 300))
+    const stretchPower = index === 3 ? 0.34 : index === 0 ? 0.32 : 0.28
+    const upwardPull = Math.max(0, -pullY)
+    const downwardPull = Math.max(0, pullY)
+    const stretchY = 1 + upwardPull * stretchPower + Math.abs(pullX) * (stretchPower * 0.16)
+    const stretchX = 1 + Math.abs(pullX) * (stretchPower * 0.42) - downwardPull * 0.035
+    const skewX = -pullX * (index === 3 ? 14 : 18)
+    const skewY = pullY * (index === 3 ? 4 : 5)
+    const bodyX = pullX * (index === 3 ? 10 : 8)
+    const bodyY = pullY * (index === 3 ? 8 : 6)
+
+    bean.style.setProperty('--bean-follow-x', `${bodyX.toFixed(2)}px`)
+    bean.style.setProperty('--bean-follow-y', `${bodyY.toFixed(2)}px`)
+    bean.style.setProperty('--bean-stretch-x', stretchX.toFixed(3))
+    bean.style.setProperty('--bean-stretch-y', stretchY.toFixed(3))
+    bean.style.setProperty('--bean-skew-x', `${skewX.toFixed(2)}deg`)
+    bean.style.setProperty('--bean-skew-y', `${skewY.toFixed(2)}deg`)
+
+    bean.querySelectorAll('i').forEach((eye) => {
+      const eyeRect = eye.getBoundingClientRect()
+      const eyeCenterX = eyeRect.left + eyeRect.width / 2
+      const eyeCenterY = eyeRect.top + eyeRect.height / 2
+      const eyeAngle = Math.atan2(targetY - eyeCenterY, targetX - eyeCenterX)
+      const eyeRange = index === 3 ? 3.2 : 4.4
+      const eyeX = Math.cos(eyeAngle) * eyeRange
+      const eyeY = Math.sin(eyeAngle) * eyeRange
+
+      eye.style.setProperty('--figma-eye-x', `${eyeX.toFixed(2)}px`)
+      eye.style.setProperty('--figma-eye-y', `${eyeY.toFixed(2)}px`)
+    })
+  })
+}
+
+const resetFigmaIllustration = (figmaBeans) => {
+  figmaBeans.forEach((bean) => {
+    bean.style.setProperty('--bean-follow-x', '0px')
+    bean.style.setProperty('--bean-follow-y', '0px')
+    bean.style.setProperty('--bean-stretch-x', '1')
+    bean.style.setProperty('--bean-stretch-y', '1')
+    bean.style.setProperty('--bean-skew-x', '0deg')
+    bean.style.setProperty('--bean-skew-y', '0deg')
+    bean.querySelectorAll('i').forEach((eye) => {
+      eye.style.setProperty('--figma-eye-x', '0px')
+      eye.style.setProperty('--figma-eye-y', '0px')
+    })
+  })
+}
+
 const lookBeansAtEachOther = (beans) => {
   beans.forEach((bean, index) => {
     const target = beans[(index + 1) % beans.length]
@@ -252,11 +307,17 @@ const setupBeanInteractions = () => {
   const loginPage = document.querySelector('.login-page')
   const loginCard = document.querySelector('.login-card')
   const beans = Array.from(document.querySelectorAll('.bean-character'))
-  if (!loginPage || !loginCard || beans.length === 0) return
+  const figmaBeans = Array.from(document.querySelectorAll('.figma-bean'))
+  if (!loginPage || !loginCard || (beans.length === 0 && figmaBeans.length === 0)) return
 
   const handleMouseMove = (event) => {
+    if (figmaBeans.length > 0) trackFigmaIllustration(figmaBeans, event.clientX, event.clientY)
     if (loginPage.classList.contains('beans-facing') || loginPage.classList.contains('beans-peeking')) return
     beans.forEach((bean) => trackBeanEyes(bean, event.clientX, event.clientY))
+  }
+
+  const handleMouseLeave = () => {
+    resetFigmaIllustration(figmaBeans)
   }
 
   const faceEachOther = () => {
@@ -299,17 +360,65 @@ const setupBeanInteractions = () => {
     }
   })
 
+  const figmaMotionCleanups = figmaBeans.map((bean, index) => {
+    let blinkTimerId
+    let blinkRestoreId
+    let wiggleTimerId
+    let wiggleRestoreId
+
+    const runFigmaBlink = () => {
+      bean.classList.add('figma-is-blinking')
+      blinkRestoreId = window.setTimeout(() => {
+        bean.classList.remove('figma-is-blinking')
+        scheduleFigmaBlink()
+      }, 130)
+    }
+
+    const runFigmaWiggle = () => {
+      bean.classList.add('figma-is-wiggling')
+      wiggleRestoreId = window.setTimeout(() => {
+        bean.classList.remove('figma-is-wiggling')
+        scheduleFigmaWiggle()
+      }, 520)
+    }
+
+    const scheduleFigmaBlink = (delay = 1800 + index * 420 + Math.random() * 3200) => {
+      blinkTimerId = window.setTimeout(() => {
+        runFigmaBlink()
+      }, delay)
+    }
+
+    const scheduleFigmaWiggle = (delay = 3600 + index * 520 + Math.random() * 3600) => {
+      wiggleTimerId = window.setTimeout(() => {
+        runFigmaWiggle()
+      }, delay)
+    }
+
+    scheduleFigmaBlink(420 + index * 160)
+    scheduleFigmaWiggle(920 + index * 240)
+
+    return () => {
+      window.clearTimeout(blinkTimerId)
+      window.clearTimeout(blinkRestoreId)
+      window.clearTimeout(wiggleTimerId)
+      window.clearTimeout(wiggleRestoreId)
+    }
+  })
+
   document.addEventListener('mousemove', handleMouseMove)
+  document.addEventListener('mouseleave', handleMouseLeave)
   loginCard.addEventListener('focusin', handleCardFocusIn)
   loginCard.addEventListener('input', handleCardInput)
   loginCard.addEventListener('focusout', handleCardFocusOut)
 
   beanCleanupCallbacks.add(() => {
     document.removeEventListener('mousemove', handleMouseMove)
+    document.removeEventListener('mouseleave', handleMouseLeave)
     loginCard.removeEventListener('focusin', handleCardFocusIn)
     loginCard.removeEventListener('input', handleCardInput)
     loginCard.removeEventListener('focusout', handleCardFocusOut)
     blinkCleanups.forEach((cleanup) => cleanup())
+    figmaMotionCleanups.forEach((cleanup) => cleanup())
   })
 }
 
@@ -345,9 +454,9 @@ onBeforeUnmount(() => {
 
     <main class="login-shell">
       <section class="hero-panel" aria-label="产品介绍">
-        <a class="left-brand-lockup" href="#/workspace" aria-label="YourBrand">
-          <span class="left-brand-mark"></span>
-          <span>YourBrand</span>
+        <a class="left-brand-lockup" href="#/workspace" :aria-label="brandName">
+          <img :src="brandLogoSrc" :alt="brandName" class="left-brand-logo">
+          <span>{{ brandName }}</span>
         </a>
 
         <div class="figma-bean-composition" aria-hidden="true">
@@ -358,9 +467,9 @@ onBeforeUnmount(() => {
         </div>
 
         <nav class="left-legal-links" aria-label="Legal links">
-          <a href="#/workspace" @click.prevent>Privacy Policy</a>
-          <a href="#/workspace" @click.prevent>Terms of Service</a>
-          <a href="#/workspace" @click.prevent>Contact</a>
+          <a href="#/workspace" @click.prevent>隐私政策</a>
+          <a href="#/workspace" @click.prevent>服务条款</a>
+          <a href="#/workspace" @click.prevent>联系我们</a>
         </nav>
 
         <div class="hero-copy">
@@ -410,9 +519,9 @@ onBeforeUnmount(() => {
         </div>
 
         <div class="bean-login-heading">
-          <p>Welcome back!</p>
-          <h1>Please enter your details</h1>
-          <span>Use your original account, phone or WeChat flow to continue.</span>
+          <p>欢迎回来！</p>
+          <h1>请输入你的登录信息</h1>
+          <span>可继续使用原有账号、手机号或微信登录流程。</span>
         </div>
 
         <div class="login-tabs" role="tablist" aria-label="登录方式">
@@ -507,18 +616,18 @@ onBeforeUnmount(() => {
 
           <template v-if="isRegister || loginMethod === 'password'">
             <label v-if="!isRegister" class="field">
-              <span>Email</span>
+              <span>邮箱</span>
               <div class="field-control field-control-mail">
                 <span class="field-icon field-icon-mail" aria-hidden="true"></span>
                 <input v-model.trim="account" autocomplete="username" placeholder="anna@gmail.com">
               </div>
             </label>
             <label class="field">
-              <span>Password</span>
+              <span>密码</span>
               <div class="password-field field-control field-control-lock">
                 <span class="field-icon field-icon-lock" aria-hidden="true"></span>
                 <input v-model="password" :type="showPassword ? 'text' : 'password'" autocomplete="current-password" placeholder="不少于 6 位">
-                <button type="button" class="password-toggle" :aria-label="showPassword ? 'Hide password' : 'Show password'" :aria-pressed="showPassword" @click.prevent.stop="togglePasswordVisibility">
+                <button type="button" class="password-toggle" :aria-label="showPassword ? '隐藏密码' : '显示密码'" :aria-pressed="showPassword" @click.prevent.stop="togglePasswordVisibility">
                   <span class="eye-icon" aria-hidden="true"></span>
                 </button>
               </div>
@@ -528,9 +637,9 @@ onBeforeUnmount(() => {
           <div v-if="!isRegister && loginMethod === 'password'" class="login-form-tools">
             <label class="remember-check">
               <input type="checkbox" checked>
-              <span>Remember for 30 days</span>
+              <span>30 天内记住我</span>
             </label>
-            <a href="#/login" @click.prevent>Forgot password?</a>
+            <a href="#/login" @click.prevent>忘记密码？</a>
           </div>
 
           <label v-if="isRegister" class="policy-check">
@@ -543,13 +652,9 @@ onBeforeUnmount(() => {
             <span v-if="isSubmitting" class="spinner"></span>
             {{ submitText }}
           </button>
-          <button v-if="!isRegister && loginMethod === 'password'" type="button" class="google-login-button" @click.prevent>
-            <span class="google-mark" aria-hidden="true"></span>
-            Log in with Google
-          </button>
           <p v-if="!isRegister" class="register-guide">
-            Don't have an account?
-            <button type="button" @click="switchAuthMode('register')">Sign Up</button>
+            还没有账号？
+            <button type="button" @click="switchAuthMode('register')">注册</button>
           </p>
         </form>
         </Transition>
@@ -2979,82 +3084,189 @@ onBeforeUnmount(() => {
   text-decoration: none;
 }
 
-.left-brand-mark {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  border-radius: 6px;
-  background: #111111;
-}
-
-.left-brand-mark::before {
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #ffffff;
+.left-brand-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(17, 17, 17, 0.12);
 }
 
 .figma-bean-composition {
   position: absolute;
-  left: 50%;
+  left: 47%;
   bottom: clamp(132px, 18vh, 190px);
   width: min(460px, 70%);
   height: 280px;
-  transform: translateX(-50%);
+  /* UI modification: tune the left illustration group size per visual feedback. */
+  transform: translateX(-50%) scale(1.1);
+  transform-origin: 50% 100%;
 }
 
+/* UI modification: make the left illustration characters more varied with CSS-only shapes. */
 .figma-bean {
   position: absolute;
   display: flex;
   justify-content: center;
   gap: 18px;
-  box-shadow: 0 24px 44px rgba(10, 10, 10, 0.14);
+  overflow: visible;
+  box-shadow: 0 26px 48px rgba(10, 10, 10, 0.13);
+  transform-origin: 50% 92%;
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+.figma-bean.figma-is-wiggling {
+  animation: figma-bean-wiggle 520ms ease-in-out;
+}
+
+.figma-bean::before,
+.figma-bean::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.figma-bean::after {
+  left: 16%;
+  right: 16%;
+  bottom: -18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(21, 25, 33, 0.12);
+  filter: blur(6px);
+  transform: rotate(-3deg);
 }
 
 .figma-bean i {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 9px;
   height: 9px;
   margin-top: 36px;
   border-radius: 999px;
   background: #ffffff;
+  transform: translate3d(var(--figma-eye-x, 0), var(--figma-eye-y, 0), 0);
+  transition: transform 110ms ease-out;
+  will-change: transform;
+}
+
+.figma-bean.figma-is-blinking i {
+  height: 2px;
+  margin-top: 40px;
+  transform: translate3d(var(--figma-eye-x, 0), var(--figma-eye-y, 0), 0) scaleX(1.28);
+}
+
+.figma-bean.figma-is-blinking.figma-bean-purple i:first-child {
+  margin-top: 62px;
+}
+
+.figma-bean.figma-is-blinking.figma-bean-black i {
+  margin-top: 42px;
+}
+
+.figma-bean.figma-is-blinking.figma-bean-yellow i:first-child {
+  margin-top: 52px;
+}
+
+.figma-bean.figma-is-blinking.figma-bean-yellow i:last-child {
+  margin-top: 46px;
+}
+
+.figma-bean.figma-is-blinking.figma-bean-orange i {
+  margin-top: 60px;
 }
 
 .figma-bean-purple {
-  left: 36px;
-  bottom: 70px;
+  --bean-rest-rotate: -10deg;
+  left: 12px;
+  bottom: 48px;
   z-index: 1;
-  width: 112px;
-  height: 176px;
-  border-radius: 56px 56px 28px 28px;
-  background: #6C4AB6;
-  transform: rotate(-8deg);
+  width: 124px;
+  height: 248px;
+  border-radius: 72px 60px 36px 50px;
+  background: linear-gradient(155deg, #7564d9 0%, #6C4AB6 66%, #58409f 100%);
+  transform: translate3d(var(--bean-follow-x, 0), var(--bean-follow-y, 0), 0) rotate(var(--bean-rest-rotate)) skew(var(--bean-skew-x, 0deg), var(--bean-skew-y, 0deg)) scale(var(--bean-stretch-x, 1), var(--bean-stretch-y, 1));
+}
+
+.figma-bean-purple::before {
+  right: 12px;
+  top: 40px;
+  width: 21px;
+  height: 112px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.figma-bean-purple i:first-child {
+  margin-top: 58px;
+}
+
+.figma-bean-purple i:last-child {
+  width: 8px;
+  height: 8px;
 }
 
 .figma-bean-black {
-  left: 166px;
-  bottom: 92px;
+  --bean-rest-rotate: 2deg;
+  left: 154px;
+  bottom: 88px;
   z-index: 2;
-  width: 118px;
-  height: 190px;
-  border-radius: 58px 58px 30px 30px;
-  background: #2D2D2D;
-  transform: rotate(3deg);
+  width: 122px;
+  height: 194px;
+  border-radius: 42px 64px 38px 32px;
+  background: linear-gradient(180deg, #314255 0%, #2D2D2D 72%);
+  transform: translate3d(var(--bean-follow-x, 0), var(--bean-follow-y, 0), 0) rotate(var(--bean-rest-rotate)) skew(var(--bean-skew-x, 0deg), var(--bean-skew-y, 0deg)) scale(var(--bean-stretch-x, 1), var(--bean-stretch-y, 1));
+}
+
+.figma-bean-black::before {
+  left: -4px;
+  top: 34px;
+  width: 9px;
+  height: 74px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.figma-bean-black::after {
+  left: 50%;
+  bottom: -16px;
+  width: 74%;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(21, 25, 33, 0.16);
+  filter: blur(6px);
+  transform: translateX(-50%) rotate(4deg);
+}
+
+.figma-bean-black i {
+  width: 8px;
+  height: 8px;
+  margin-top: 38px;
+  background: #d8efff;
 }
 
 .figma-bean-yellow {
+  --bean-rest-rotate: 7deg;
   right: 42px;
-  bottom: 50px;
+  bottom: 42px;
   z-index: 3;
-  width: 122px;
-  height: 180px;
-  border-radius: 58px 58px 30px 30px;
-  background: #E9D34F;
-  transform: rotate(7deg);
+  width: 124px;
+  height: 176px;
+  border-radius: 50px 42px 34px 46px;
+  background: linear-gradient(158deg, #efe36f 0%, #E9D34F 62%, #c9c55f 100%);
+  transform: translate3d(var(--bean-follow-x, 0), var(--bean-follow-y, 0), 0) rotate(var(--bean-rest-rotate)) skew(var(--bean-skew-x, 0deg), var(--bean-skew-y, 0deg)) scale(var(--bean-stretch-x, 1), var(--bean-stretch-y, 1));
+}
+
+.figma-bean-yellow::before {
+  left: 18px;
+  top: 20px;
+  width: 48px;
+  height: 18px;
+  border-radius: 70% 40% 90% 30%;
+  background: rgba(255, 255, 255, 0.22);
+  transform: rotate(-12deg);
 }
 
 .figma-bean-yellow i,
@@ -3062,29 +3274,68 @@ onBeforeUnmount(() => {
   background: #111111;
 }
 
+.figma-bean-yellow i:first-child {
+  margin-top: 48px;
+}
+
+.figma-bean-yellow i:last-child {
+  width: 8px;
+  height: 8px;
+  margin-top: 42px;
+}
+
 .figma-bean-yellow b {
   position: absolute;
   left: 50%;
-  top: 72px;
-  width: 28px;
+  top: 82px;
+  width: 30px;
   height: 2px;
   border-radius: 999px;
   background: #111111;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(5deg);
 }
 
 .figma-bean-orange {
-  left: 116px;
-  bottom: 18px;
+  --bean-rest-rotate: -1deg;
+  left: 70px;
+  bottom: 0;
   z-index: 4;
-  width: 170px;
-  height: 98px;
-  border-radius: 90px 90px 30px 30px;
-  background: #FF9A76;
+  width: 232px;
+  height: 124px;
+  border-radius: 126px 126px 38px 38px;
+  background: linear-gradient(180deg, #ffa987 0%, #FF9A76 72%, #e68a73 100%);
+  transform: translate3d(var(--bean-follow-x, 0), var(--bean-follow-y, 0), 0) rotate(var(--bean-rest-rotate)) skew(var(--bean-skew-x, 0deg), var(--bean-skew-y, 0deg)) scale(var(--bean-stretch-x, 1), var(--bean-stretch-y, 1));
+}
+
+.figma-bean-orange::before {
+  left: 34px;
+  right: 34px;
+  top: 18px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .figma-bean-orange i {
-  margin-top: 38px;
+  width: 9px;
+  height: 9px;
+  margin-top: 56px;
+}
+
+@keyframes figma-bean-wiggle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  26% {
+    rotate: -2.8deg;
+  }
+  58% {
+    rotate: 2.2deg;
+  }
+  82% {
+    rotate: -1deg;
+  }
 }
 
 .left-legal-links {
@@ -3146,14 +3397,15 @@ onBeforeUnmount(() => {
 }
 
 .bean-login-heading {
-  width: min(360px, 100%);
-  margin: 0 auto 28px;
+  /* UI modification: enlarge the right-side login control area without changing form logic. */
+  width: min(420px, 100%);
+  margin: 0 auto 32px;
   text-align: left;
 }
 
 .bean-login-heading p {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0;
@@ -3163,7 +3415,7 @@ onBeforeUnmount(() => {
 .bean-login-heading h1 {
   margin-top: 8px;
   color: var(--figma-muted);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -3174,25 +3426,25 @@ onBeforeUnmount(() => {
 
 .login-tabs,
 .search-auth-card .login-tabs {
-  width: min(360px, 100%);
+  width: min(420px, 100%);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  height: 36px;
-  margin: 0 auto 10px;
-  padding: 3px;
+  gap: 8px;
+  height: 42px;
+  margin: 0 auto 12px;
+  padding: 4px;
   border: 1px solid var(--figma-border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: #111111;
 }
 
 .login-tabs button,
 .search-auth-card .login-tabs button {
-  height: 28px;
-  border-radius: 6px;
+  height: 32px;
+  border-radius: 7px;
   color: #7d7d7d;
   background: transparent;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -3207,22 +3459,22 @@ onBeforeUnmount(() => {
 .search-auth-card .method-tabs {
   grid-column: auto;
   grid-row: auto;
-  width: min(360px, 100%);
+  width: min(420px, 100%);
   display: flex;
-  gap: 6px;
-  margin: 0 auto 22px;
+  gap: 8px;
+  margin: 0 auto 26px;
 }
 
 .method-tabs button,
 .search-auth-card .method-tabs button {
   flex: 1;
   min-width: 0;
-  height: 30px;
+  height: 36px;
   border: 1px solid var(--figma-border);
-  border-radius: 8px;
+  border-radius: 10px;
   color: #777777;
   background: transparent;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -3238,7 +3490,7 @@ onBeforeUnmount(() => {
 .search-auth-card .auth-form,
 .qr-panel,
 .search-auth-card .qr-panel {
-  width: min(360px, 100%);
+  width: min(420px, 100%);
   margin: 0 auto;
 }
 
@@ -3246,7 +3498,7 @@ onBeforeUnmount(() => {
 .search-auth-card .auth-form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 18px;
 }
 
 .field {
@@ -3275,14 +3527,14 @@ onBeforeUnmount(() => {
 .field input,
 .search-auth-card .field input {
   width: 100%;
-  height: 44px;
-  padding: 0 14px;
+  height: 50px;
+  padding: 0 16px;
   border: 1px solid #272727;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--figma-field);
   color: #ffffff;
-  font-size: 14px;
-  line-height: 44px;
+  font-size: 15px;
+  line-height: 50px;
   outline: none;
   box-shadow: none;
   transition: border-color 160ms ease, background 160ms ease;
@@ -3357,9 +3609,9 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin: -2px 0 4px;
+  margin: -1px 0 6px;
   color: #9a9a9a;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .remember-check {
@@ -3369,14 +3621,14 @@ onBeforeUnmount(() => {
 }
 
 .remember-check input {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   accent-color: #ffffff;
 }
 
 .login-form-tools a {
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
 }
 
@@ -3388,14 +3640,14 @@ onBeforeUnmount(() => {
 .search-auth-card .submit-button {
   width: 100%;
   min-width: 0;
-  height: 44px;
+  height: 50px;
   margin: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #0a0a0a;
   background: #ffffff;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 650;
   transition: background 160ms ease, transform 160ms ease;
 }
@@ -3407,55 +3659,6 @@ onBeforeUnmount(() => {
   box-shadow: none;
   filter: none;
   transform: none;
-}
-
-.google-login-button {
-  width: 100%;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 1px solid #2f2f2f;
-  border-radius: 8px;
-  color: #ffffff;
-  background: transparent;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease;
-}
-
-.google-login-button:hover {
-  border-color: #4a4a4a;
-  background: #121212;
-}
-
-.google-mark {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background:
-    conic-gradient(from -40deg, #4285F4 0 25%, #34A853 0 50%, #FBBC05 0 75%, #EA4335 0 100%);
-}
-
-.google-mark::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border-radius: 999px;
-  background: var(--figma-black);
-}
-
-.google-mark::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 7px;
-  width: 9px;
-  height: 4px;
-  background: #4285F4;
 }
 
 .register-guide {
@@ -3499,18 +3702,18 @@ onBeforeUnmount(() => {
 .code-row,
 .search-auth-card .code-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 106px;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) 118px;
+  gap: 12px;
 }
 
 .code-row button,
 .search-auth-card .code-row button {
-  height: 44px;
+  height: 50px;
   border: 1px solid #2f2f2f;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #ffffff;
   background: transparent;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .code-row button:hover:not(:disabled),
@@ -3521,14 +3724,14 @@ onBeforeUnmount(() => {
 .qr-panel,
 .search-auth-card .qr-panel {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .qr-frame,
 .search-auth-card .qr-frame {
   display: block;
-  width: 184px;
-  height: 184px;
+  width: 210px;
+  height: 210px;
   margin: 0 auto;
   border: 1px solid #2b2b2b;
   border-radius: 16px;
@@ -3564,11 +3767,12 @@ onBeforeUnmount(() => {
 .search-auth-card .login-method {
   width: 100%;
   min-width: 0;
-  height: 42px;
+  height: 48px;
   border: 1px solid #2f2f2f;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #ffffff;
   background: transparent;
+  font-size: 14px;
 }
 
 .login-method:hover,
@@ -3594,6 +3798,7 @@ onBeforeUnmount(() => {
   }
 
   .figma-bean-composition {
+    left: 50%;
     bottom: 72px;
     width: min(380px, 78%);
     transform: translateX(-50%) scale(0.82);
