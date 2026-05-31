@@ -15,10 +15,11 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #4c53f5 0%, #8a5cff 52%, #c84fff 100%);
+  /* UI modification: Unifydata primary-button color and 6px radius. */
+  border-radius: 6px;
+  background: #6082f7;
   color: #fff;
-  box-shadow: 0 10px 30px rgba(126, 87, 255, 0.24);
+  box-shadow: none;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -31,7 +32,7 @@
 
 .layout-login-button:hover {
   filter: brightness(1.08);
-  box-shadow: 0 12px 34px rgba(126, 87, 255, 0.34);
+  box-shadow: none;
 }
 
 .layout-login-button:active {

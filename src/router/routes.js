@@ -1,5 +1,12 @@
 export const routes = [
   {
+    path: "/showcase",
+    layout: "auth",
+    bodyClass: "geist_45906e97-module__4TOE8G__variable geist_mono_ecbcca75-module__nHvC6W__variable antialiased",
+    htmlAttrs: {"lang":"zh","dataBrand":"tangan"},
+    component: () => import('./../pages/showcase/ShowcasePage.vue'),
+  },
+  {
     path: "/login",
     layout: "auth",
     bodyClass: "geist_45906e97-module__4TOE8G__variable geist_mono_ecbcca75-module__nHvC6W__variable antialiased",

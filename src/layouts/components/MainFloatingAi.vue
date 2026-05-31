@@ -270,7 +270,7 @@ onBeforeUnmount(() => {
           <img class="floating-ai-avatar" :src="agent.avatar" :alt="agent.name">
           <div class="floating-ai-title">
             <strong>{{ agent.name }}</strong>
-            <span>Siyan-agent-v5</span>
+            <span>Tangan-agent-v5</span>
           </div>
           <button
             v-if="isSending"
@@ -397,7 +397,7 @@ onBeforeUnmount(() => {
   top: calc(var(--promo-banner-h, 0px) + 18px);
   right: 18px;
   bottom: 18px;
-  left: calc(68px + 18px);
+  left: calc(220px + 18px);
   align-items: stretch;
   justify-content: flex-end;
   padding: 0;
@@ -415,11 +415,12 @@ onBeforeUnmount(() => {
   min-height: 430px;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(203, 213, 225, 0.82);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 24px 80px rgba(76, 83, 245, 0.18), 0 10px 28px rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(18px);
+  /* UI modification: Unifydata white card treatment for the global floating AI panel. */
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  backdrop-filter: none;
   transform-origin: bottom center;
   transition:
     width 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -434,8 +435,8 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   min-height: 0;
-  border-radius: 22px;
-  box-shadow: 0 28px 96px rgba(76, 83, 245, 0.22), 0 14px 40px rgba(15, 23, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .main-floating-ai.is-maximized .floating-ai-pill {
@@ -465,7 +466,7 @@ onBeforeUnmount(() => {
 .floating-ai-avatar {
   width: 40px;
   height: 40px;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.16);
+  box-shadow: 0 0 0 2px rgba(96, 130, 247, 0.16);
 }
 
 .floating-ai-title {
@@ -504,14 +505,14 @@ onBeforeUnmount(() => {
   height: 30px;
   border-radius: 999px;
   padding: 0 10px;
-  color: #4f46e5;
+  color: #6082f7;
   background: #eef2ff;
   font-size: 12px;
   font-weight: 800;
 }
 
 .floating-ai-stop:hover {
-  background: #e0e7ff;
+  background: rgba(96, 130, 247, 0.14);
 }
 
 .floating-ai-icon-button {
@@ -525,7 +526,7 @@ onBeforeUnmount(() => {
 }
 
 .floating-ai-icon-button:hover {
-  color: #4f46e5;
+  color: #6082f7;
   background: #eef2ff;
 }
 
@@ -568,8 +569,8 @@ onBeforeUnmount(() => {
 
 .floating-ai-message.is-user .floating-ai-bubble {
   color: #fff;
-  background: linear-gradient(135deg, #4c53f5, #bf4fff);
-  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.18);
+  background: #6082f7;
+  box-shadow: none;
 }
 
 .floating-ai-message.is-error .floating-ai-bubble {
@@ -628,7 +629,7 @@ onBeforeUnmount(() => {
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #8b5cf6;
+  background: #6082f7;
   animation: floating-ai-dot 820ms ease-in-out infinite;
 }
 
@@ -649,8 +650,8 @@ onBeforeUnmount(() => {
 }
 
 .floating-ai-actions button {
-  border: 1px solid rgba(139, 92, 246, 0.16);
-  border-radius: 999px;
+  border: 1px solid rgba(96, 130, 247, 0.16);
+  border-radius: 6px;
   padding: 7px 11px;
   color: #4b5563;
   background: rgba(248, 250, 252, 0.9);
@@ -661,8 +662,8 @@ onBeforeUnmount(() => {
 }
 
 .floating-ai-actions button:hover:not(:disabled) {
-  border-color: rgba(79, 70, 229, 0.32);
-  color: #4f46e5;
+  border-color: rgba(96, 130, 247, 0.32);
+  color: #6082f7;
   background: #eef2ff;
 }
 
@@ -708,7 +709,7 @@ onBeforeUnmount(() => {
 }
 
 .floating-ai-composer textarea:focus {
-  box-shadow: inset 0 0 0 2px rgba(99, 102, 241, 0.42);
+  box-shadow: inset 0 0 0 2px rgba(96, 130, 247, 0.36);
 }
 
 .floating-ai-composer textarea:disabled {
@@ -723,10 +724,10 @@ onBeforeUnmount(() => {
   place-items: center;
   align-self: end;
   border: 0;
-  border-radius: 999px;
+  border-radius: 6px;
   color: #fff;
-  background: linear-gradient(135deg, #4c53f5, #bf4fff);
-  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.28);
+  background: #6082f7;
+  box-shadow: none;
   cursor: pointer;
   transition: opacity 160ms ease, transform 160ms ease;
 }
@@ -746,21 +747,21 @@ onBeforeUnmount(() => {
   justify-content: center;
   gap: 10px;
   max-width: 260px;
-  border: 2px solid rgba(139, 92, 246, 0.26);
-  border-radius: 999px;
+  border: 1px solid rgba(96, 130, 247, 0.22);
+  border-radius: 8px;
   padding: 6px 7px 6px 6px;
   color: #4b5563;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.14);
-  backdrop-filter: blur(14px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  backdrop-filter: none;
   cursor: text;
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .floating-ai-pill:hover,
 .main-floating-ai.is-open .floating-ai-pill {
-  border-color: rgba(79, 70, 229, 0.42);
-  box-shadow: 0 18px 48px rgba(79, 70, 229, 0.2);
+  border-color: rgba(96, 130, 247, 0.42);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .floating-ai-pill-avatar {
@@ -798,10 +799,10 @@ onBeforeUnmount(() => {
   height: 30px;
   place-items: center;
   flex: 0 0 auto;
-  border-radius: 999px;
+  border-radius: 6px;
   color: #fff;
-  background: linear-gradient(135deg, #4c53f5, #bf4fff);
-  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.26);
+  background: #6082f7;
+  box-shadow: none;
 }
 
 .floating-ai-panel-enter-active,
@@ -832,11 +833,11 @@ onBeforeUnmount(() => {
 
 @media (min-width: 768px) {
   .main-floating-ai {
-    left: 68px;
+    left: 220px;
   }
 
   .main-floating-ai.is-maximized {
-    left: calc(68px + 18px);
+    left: calc(220px + 18px);
   }
 }
 

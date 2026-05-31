@@ -111,7 +111,7 @@ export const getFloatingAiSystemMessage = (currentPath = '') => {
           : '跨境电商工作台'
 
   return [
-    '你是思燕智选的 AI 助手小思。',
+    '你是糖安罗盘的 AI 助手小思。',
     `当前用户所在页面：${area}。`,
     '请用简洁、可执行的中文回答，优先给出下一步行动。',
     '如果用户的问题和页面业务相关，请结合跨境电商、TikTok Shop、选品、内容和运营语境。',

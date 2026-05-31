@@ -10,6 +10,7 @@ defineProps({
 </script>
 
 <template>
+  <!-- UI modification: keeps the original module sidebar/slot structure while inheriting the unified layout styles. -->
   <ModuleSidebar :current-path="currentPath" />
   <slot />
 </template>

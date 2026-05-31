@@ -368,22 +368,24 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   display: none;
 }
 
+/* UI modification: Unifydata secondary sidebar aligned to the 220px primary sidebar. */
 .module-sidebar-panel {
   position: relative;
   height: 100%;
   overflow: hidden;
-  border-right: 1px solid rgba(214, 211, 209, 0.3);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: #151921;
+  color: rgba(255, 255, 255, 0.68);
+  backdrop-filter: none;
   transition: width 200ms ease-out;
 }
 
 .module-sidebar-panel[data-sidebar-expanded="true"] {
-  width: 176px;
+  width: 220px;
 }
 
 .module-sidebar-panel[data-sidebar-expanded="false"] {
-  width: 56px;
+  width: 72px;
 }
 
 .module-sidebar-nav {
@@ -395,7 +397,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 
 .module-sidebar-platform-control {
   flex: 0 0 auto;
-  padding: 12px 12px 0;
+  padding: 18px 16px 0;
 }
 
 .module-sidebar-platform-menu {
@@ -412,11 +414,11 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border: 1px solid rgba(214, 211, 209, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
   padding: 0 12px;
-  color: #44403c;
+  color: #fff;
   font-size: 14px;
   cursor: pointer;
   outline: none;
@@ -425,9 +427,9 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 
 .module-sidebar-platform-trigger:hover,
 .module-sidebar-platform-trigger:focus-visible {
-  background: #fff;
-  border-color: rgba(120, 113, 108, 0.38);
-  box-shadow: 0 0 0 3px rgba(76, 83, 245, 0.12);
+  background: rgba(96, 130, 247, 0.16);
+  border-color: rgba(96, 130, 247, 0.34);
+  box-shadow: 0 0 0 3px rgba(96, 130, 247, 0.16);
 }
 
 .module-sidebar-platform-value,
@@ -445,9 +447,9 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  background: rgba(76, 83, 245, 0.1);
+  background: rgba(96, 130, 247, 0.18);
   padding: 0 4px;
-  color: #4c53f5;
+  color: #fff;
   font-size: 10px;
   font-weight: 700;
 }
@@ -467,7 +469,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 
 .module-sidebar-platform-meta {
   flex: 0 0 auto;
-  color: #a8a29e;
+  color: rgba(255, 255, 255, 0.44);
   font-size: 12px;
 }
 
@@ -484,7 +486,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-small-icon {
-  opacity: 0.5;
+  opacity: 0.66;
 }
 
 .module-sidebar-platform-popover {
@@ -493,7 +495,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   right: 0;
   top: 40px;
   z-index: 50;
-  border: 1px solid #e7e5e4;
+  border: 1px solid rgba(21, 25, 33, 0.08);
   border-radius: 8px;
   background: #fff;
   padding: 4px;
@@ -510,12 +512,12 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-platform-option:hover {
-  background: rgba(76, 83, 245, 0.05);
+  background: rgba(96, 130, 247, 0.08);
 }
 
 .module-sidebar-platform-option.is-active {
-  color: #4c53f5;
-  background: rgba(76, 83, 245, 0.1);
+  color: #6082f7;
+  background: rgba(96, 130, 247, 0.12);
   font-weight: 600;
 }
 
@@ -530,8 +532,8 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 .module-sidebar-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 8px 8px 16px;
+  gap: 18px;
+  padding: 16px 16px 20px;
 }
 
 .module-sidebar-section {
@@ -545,7 +547,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-section-title {
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.4);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -592,7 +594,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #57534e;
+  color: rgba(255, 255, 255, 0.66);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -606,14 +608,14 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 
 .module-sidebar-link:hover,
 .module-sidebar-accordion-trigger:hover {
-  color: #57534e;
-  background: rgba(76, 83, 245, 0.05);
-  transform: translateX(2px);
+  color: #fff;
+  background: rgba(96, 130, 247, 0.16);
+  transform: none;
 }
 
 .module-sidebar-link:focus-visible,
 .module-sidebar-accordion-trigger:focus-visible {
-  box-shadow: 0 0 0 3px rgba(76, 83, 245, 0.18);
+  box-shadow: 0 0 0 3px rgba(96, 130, 247, 0.18);
 }
 
 .module-sidebar-link::before {
@@ -624,18 +626,18 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   width: 3px;
   height: 14px;
   border-radius: 999px;
-  background: #4c53f5;
+  background: #6082f7;
   opacity: 0;
   transform: translate(-5px, -50%) scaleY(0.5);
   transition: opacity 220ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .module-sidebar-link.is-active {
-  color: #4c53f5;
-  background: rgba(76, 83, 245, 0.1);
+  color: #fff;
+  background: rgba(96, 130, 247, 0.18);
   font-weight: 600;
-  transform: translateX(4px);
-  box-shadow: 0 8px 20px rgba(76, 83, 245, 0.08);
+  transform: none;
+  box-shadow: none;
 }
 
 .module-sidebar-link.is-active::before {
@@ -662,7 +664,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-muted-icon {
-  color: #78716c;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .module-sidebar-icon { 
@@ -675,7 +677,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-chevron {
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.46);
   transform: translateY(2px);
   transition: transform 200ms ease;
 }
@@ -693,7 +695,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   flex: 0 0 auto;
   margin-left: auto;
   border-radius: 999px;
-  background: #f97316;
+  background: #6082f7;
   color: #fff;
   font-size: 9px;
   font-weight: 800;
@@ -716,15 +718,15 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   justify-content: center;
   border: 0;
   border-radius: 0 6px 6px 0;
-  background: rgba(223, 223, 255, 0.51);
-  color: #4c53f5;
+  background: rgba(96, 130, 247, 0.18);
+  color: #fff;
   cursor: pointer;
   padding: 0 2px;
   transition: background 160ms ease, color 160ms ease;
 }
 
 .module-sidebar-toggle:hover {
-  background: rgba(223, 223, 255, 0.72);
+  background: rgba(96, 130, 247, 0.28);
 }
 
 .module-sidebar-chat-panel {
@@ -762,14 +764,15 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #44403c;
+  color: rgba(255, 255, 255, 0.76);
   cursor: pointer;
   padding: 8px 12px;
   transition: background 160ms ease;
 }
 
 .module-sidebar-chat-new:hover {
-  background: rgba(76, 83, 245, 0.05);
+  color: #fff;
+  background: rgba(96, 130, 247, 0.16);
 }
 
 .module-sidebar-chat-new-text {
@@ -791,7 +794,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   position: absolute;
   left: 10px;
   top: 50%;
-  color: #a8a29e;
+  color: rgba(255, 255, 255, 0.42);
   pointer-events: none;
   transform: translateY(-50%);
 }
@@ -805,10 +808,10 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 .module-sidebar-chat-search-input {
   width: 100%;
   height: 32px;
-  border: 1px solid rgba(214, 211, 209, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 8px;
-  background: #fff;
-  color: #44403c;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
   font-size: 14px;
   outline: none;
   padding: 0 28px;
@@ -816,16 +819,16 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-chat-search-input::placeholder {
-  color: #a8a29e;
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .module-sidebar-chat-search-input:hover,
 .module-sidebar-chat-search-input:focus {
-  border-color: #d6d3d1;
+  border-color: rgba(96, 130, 247, 0.38);
 }
 
 .module-sidebar-chat-search-input:focus {
-  box-shadow: 0 0 0 3px rgba(120, 113, 108, 0.16);
+  box-shadow: 0 0 0 3px rgba(96, 130, 247, 0.18) !important;
 }
 
 .module-sidebar-chat-list-inner {
@@ -844,24 +847,24 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   width: 100%;
   align-items: center;
   gap: 6px;
-  border: 1px solid rgba(214, 211, 209, 0.7);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
-  color: #44403c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.74);
   padding: 8px 10px;
   text-align: left;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
 .module-sidebar-chat-item:hover {
-  background: #fff;
-  border-color: #d6d3d1;
+  background: rgba(96, 130, 247, 0.14);
+  border-color: rgba(96, 130, 247, 0.24);
 }
 
 .module-sidebar-chat-item.is-active {
-  color: #1c1917;
-  background: rgba(76, 83, 245, 0.1);
-  border-color: rgba(76, 83, 245, 0.2);
+  color: #fff;
+  background: rgba(96, 130, 247, 0.18);
+  border-color: rgba(96, 130, 247, 0.34);
 }
 
 .module-sidebar-chat-open {
@@ -911,7 +914,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   align-items: center;
   gap: 6px;
   margin-top: 2px;
-  color: #78716c;
+  color: rgba(255, 255, 255, 0.46);
   font-size: 11px;
 }
 
@@ -929,7 +932,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #a8a29e;
+  color: rgba(255, 255, 255, 0.46);
   cursor: pointer;
   opacity: 0;
   transition: opacity 160ms ease, background 160ms ease, color 160ms ease;
@@ -947,9 +950,9 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 
 .module-sidebar-empty-state {
   margin-top: 8px;
-  border: 1px solid rgba(214, 211, 209, 0.7);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
   padding: 12px;
   text-align: center;
 }
@@ -960,14 +963,14 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 }
 
 .module-sidebar-empty-title {
-  color: #292524;
+  color: #fff;
   font-size: 13px;
   font-weight: 700;
 }
 
 .module-sidebar-empty-text {
   margin-top: 4px;
-  color: #78716c;
+  color: rgba(255, 255, 255, 0.46);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -975,7 +978,7 @@ const conversationClass = (conversation) => (conversation.id === activeConversat
 @media (min-width: 768px) {
   .module-sidebar-shell {
     position: fixed;
-    left: 68px;
+    left: 220px;
     top: var(--promo-banner-h, 0px);
     z-index: 40;
     display: flex;
