@@ -63,7 +63,7 @@ const setTab = (key) => {
 </script>
 
 <template>
-  <article class="workspace-unify-card rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col min-w-0 h-[680px]">
+  <article class="workspace-unify-card rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col min-w-0 h-auto">
     <div class="w-full px-4 py-3 flex items-center gap-2.5 text-left">
       <a :href="`#${panel.footer.href}`" class="shrink-0">
         <img
@@ -119,8 +119,8 @@ const setTab = (key) => {
       </div>
     </div>
 
-    <div class="relative flex-1 min-h-0 flex flex-col">
-      <div class="overflow-y-auto scrollbar-hide px-4 pt-3 pb-1 flex-1 min-h-0">
+    <div class="relative flex flex-col">
+      <div class="scrollbar-hide px-4 pt-3 pb-1">
         <div class="mb-3 text-xs leading-relaxed text-gray-500">
           {{ currentTab.description }}
         </div>
@@ -217,16 +217,36 @@ const setTab = (key) => {
 }
 
 .workspace-unify-card :deep([role="tab"]) {
+  position: relative;
   border: 0 !important;
-  border-radius: 0 !important;
+  border-radius: 999px !important;
   background: transparent !important;
   color: #666666 !important;
-  padding: 8px 0 10px !important;
+  padding: 8px 12px 10px !important;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+/* UI modification: 选项卡悬浮时上浮并切换为 #DBFFBA 柔和渐变，保留原有点击逻辑。 */
+.workspace-unify-card :deep([role="tab"]:hover) {
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.95), rgba(226, 187, 255, 0.32)) !important;
+  box-shadow: 0 10px 22px rgba(96, 130, 247, 0.14) !important;
+  color: #151921 !important;
+  transform: translateY(-2px);
 }
 
 .workspace-unify-card :deep([role="tab"][aria-selected="true"]) {
   color: #151921 !important;
   font-weight: 600 !important;
+}
+
+.workspace-unify-card :deep([role="tab"][aria-selected="true"]:hover) {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.9), rgba(96, 130, 247, 0.12)) !important;
 }
 
 .workspace-unify-card :deep([role="tab"][aria-selected="true"] span:last-child) {
@@ -238,6 +258,37 @@ const setTab = (key) => {
   border-radius: 8px !important;
   background: #fff !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+/* UI modification: 总览商品/脚本小卡 hover 统一为 #DBFFBA 渐变、上浮和阴影反馈。 */
+.workspace-unify-card :deep(a.rounded-xl:hover),
+.workspace-unify-card :deep(.rounded-xl:hover) {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff) !important;
+  box-shadow: 0 14px 28px rgba(96, 130, 247, 0.15) !important;
+  transform: translateY(-3px);
+}
+
+.workspace-unify-card :deep(a.inline-flex) {
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+/* UI modification: 总览底部查看按钮 hover 补齐同款反馈。 */
+.workspace-unify-card :deep(a.inline-flex:hover) {
+  background: linear-gradient(135deg, #6082f7, #dbffba) !important;
+  box-shadow: 0 12px 24px rgba(96, 130, 247, 0.2);
+  color: #151921 !important;
+  transform: translateY(-2px);
 }
 
 .workspace-unify-card :deep(.bg-sky-100),

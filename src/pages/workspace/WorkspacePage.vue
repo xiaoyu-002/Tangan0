@@ -549,7 +549,10 @@ onBeforeUnmount(() => {
             </section>
 
             <!-- UI modification: original interactive opportunity tabs retained and styled in the new dashboard system. -->
-            <section class="workspace-dashboard-panel-section animate-fade-in" data-section="ai-brief">
+            <section
+              class="workspace-dashboard-card workspace-dashboard-panel-section workspace-dashboard-overview-section animate-fade-in"
+              data-section="ai-brief"
+            >
               <div class="workspace-dashboard-section-heading">
                 <h2>{{ workspaceData.header.title }}</h2>
                 <p>{{ workspaceData.header.description }}</p>
@@ -561,66 +564,66 @@ onBeforeUnmount(() => {
                   :panel="panel"
                 />
               </div>
-            </section>
 
-            <!-- UI modification: original support links and task filters retained below the dashboard table. -->
-            <section v-if="support" class="workspace-dashboard-support-grid">
-              <article class="workspace-dashboard-card workspace-dashboard-support-card">
-                <div class="workspace-dashboard-card-header">
-                  <a class="workspace-dashboard-card-title-link" :href="`#${support.chat.href}`">
-                    <h2>{{ support.chat.title }}</h2>
-                  </a>
-                </div>
-                <p>{{ support.chat.summary }}</p>
-                <div class="workspace-dashboard-message-list">
-                  <a
-                    v-for="message in support.chat.messages"
-                    :key="`${message.agent}-${message.time}`"
-                    :href="`#${support.chat.href}`"
-                    class="workspace-dashboard-message-row"
-                  >
-                    <img :src="message.avatar" :alt="message.agent">
-                    <span>
-                      <strong>{{ message.agent }}</strong>
-                      <small>{{ message.text }}</small>
-                    </span>
-                    <time>{{ message.time }}</time>
-                  </a>
-                </div>
-              </article>
-
-              <article class="workspace-dashboard-card workspace-dashboard-support-card">
-                <div class="workspace-dashboard-card-header">
-                  <a class="workspace-dashboard-card-title-link" :href="`#${support.tasks.href}`">
-                    <h2>{{ support.tasks.title }}</h2>
-                  </a>
-                  <div class="workspace-dashboard-tabs">
-                    <button
-                      v-for="filter in support.tasks.filters"
-                      :key="filter.key"
-                      type="button"
-                      class="rounded-[5px] px-2 py-0.5 text-[10px] font-medium transition-colors cursor-pointer"
-                      :class="filter.key === support.tasks.activeFilter ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
-                    >
-                      {{ filter.label }}
-                    </button>
+              <!-- UI modification: 合并对话与任务到工作台总览区块内，保留原有链接与筛选按钮。 -->
+              <div v-if="support" class="workspace-dashboard-support-grid workspace-dashboard-overview-support">
+                <article class="workspace-dashboard-card workspace-dashboard-support-card">
+                  <div class="workspace-dashboard-card-header">
+                    <a class="workspace-dashboard-card-title-link" :href="`#${support.chat.href}`">
+                      <h2>{{ support.chat.title }}</h2>
+                    </a>
                   </div>
-                </div>
-                <div class="workspace-dashboard-task-list">
-                  <a
-                    v-for="task in support.tasks.items"
-                    :key="task.title"
-                    :href="`#${support.tasks.href}`"
-                    class="workspace-dashboard-task-row"
-                  >
-                    <span>
-                      <strong>{{ task.title }}</strong>
-                      <small>{{ task.agent }} / {{ task.due }}</small>
-                    </span>
-                    <em>{{ task.status }}</em>
-                  </a>
-                </div>
-              </article>
+                  <p>{{ support.chat.summary }}</p>
+                  <div class="workspace-dashboard-message-list">
+                    <a
+                      v-for="message in support.chat.messages"
+                      :key="`${message.agent}-${message.time}`"
+                      :href="`#${support.chat.href}`"
+                      class="workspace-dashboard-message-row"
+                    >
+                      <img :src="message.avatar" :alt="message.agent">
+                      <span>
+                        <strong>{{ message.agent }}</strong>
+                        <small>{{ message.text }}</small>
+                      </span>
+                      <time>{{ message.time }}</time>
+                    </a>
+                  </div>
+                </article>
+
+                <article class="workspace-dashboard-card workspace-dashboard-support-card">
+                  <div class="workspace-dashboard-card-header">
+                    <a class="workspace-dashboard-card-title-link" :href="`#${support.tasks.href}`">
+                      <h2>{{ support.tasks.title }}</h2>
+                    </a>
+                    <div class="workspace-dashboard-tabs">
+                      <button
+                        v-for="filter in support.tasks.filters"
+                        :key="filter.key"
+                        type="button"
+                        class="rounded-[5px] px-2 py-0.5 text-[10px] font-medium transition-colors cursor-pointer"
+                        :class="filter.key === support.tasks.activeFilter ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+                      >
+                        {{ filter.label }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="workspace-dashboard-task-list">
+                    <a
+                      v-for="task in support.tasks.items"
+                      :key="task.title"
+                      :href="`#${support.tasks.href}`"
+                      class="workspace-dashboard-task-row"
+                    >
+                      <span>
+                        <strong>{{ task.title }}</strong>
+                        <small>{{ task.agent }} / {{ task.due }}</small>
+                      </span>
+                      <em>{{ task.status }}</em>
+                    </a>
+                  </div>
+                </article>
+              </div>
             </section>
           </div>
         </template>
@@ -877,12 +880,48 @@ onBeforeUnmount(() => {
 }
 
 .workspace-dashboard-kpi-card {
+  position: relative;
   display: flex;
   min-height: 156px;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   padding: 20px;
   text-decoration: none;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* UI modification: KPI 可点击卡片悬浮时补充 #DBFFBA 渐变、上浮和阴影反馈。 */
+.workspace-dashboard-kpi-card::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(219, 255, 186, 0.72), transparent 42%),
+    linear-gradient(135deg, rgba(219, 255, 186, 0.9), rgba(226, 187, 255, 0.22) 55%, rgba(255, 255, 255, 0.95));
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.workspace-dashboard-kpi-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.workspace-dashboard-kpi-card:hover {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff) !important;
+  box-shadow: 0 16px 36px rgba(96, 130, 247, 0.16);
+  transform: translateY(-3px);
+}
+
+.workspace-dashboard-kpi-card:hover::before {
+  opacity: 1;
 }
 
 .workspace-dashboard-kpi-label {
@@ -919,6 +958,7 @@ onBeforeUnmount(() => {
 
 .workspace-dashboard-chart-grid {
   display: grid;
+  align-items: start;
   grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.85fr);
   gap: 24px;
 }
@@ -926,7 +966,8 @@ onBeforeUnmount(() => {
 .workspace-dashboard-line-card,
 .workspace-dashboard-donut-card,
 .workspace-dashboard-table-card,
-.workspace-dashboard-support-card {
+.workspace-dashboard-support-card,
+.workspace-dashboard-overview-section {
   padding: 20px;
 }
 
@@ -957,15 +998,68 @@ onBeforeUnmount(() => {
 
 .workspace-dashboard-link,
 .workspace-dashboard-card-title-link {
+  display: inline-flex;
+  align-items: center;
   color: #6082f7;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* UI modification: 图表与表格查看链接 hover 补齐 #DBFFBA 渐变、上浮和阴影反馈。 */
+.workspace-dashboard-link:hover {
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.95), rgba(226, 187, 255, 0.32));
+  box-shadow: 0 10px 22px rgba(96, 130, 247, 0.14);
+  color: #151921;
+  padding: 4px 8px;
+  transform: translateY(-2px);
+}
+
+/* UI modification: 总览标题/查看链接 hover 补齐同款交互反馈。 */
+.workspace-dashboard-overview-section .workspace-dashboard-card-title-link:hover {
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.95), rgba(226, 187, 255, 0.32));
+  box-shadow: 0 10px 22px rgba(96, 130, 247, 0.14);
+  color: #151921;
+  padding: 4px 8px;
+  transform: translateY(-2px);
+}
+
+/* UI modification: 填充交易与收入卡片的空白区域，保留原有图表、数据和链接逻辑。 */
+.workspace-dashboard-line-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.workspace-dashboard-line-card::before {
+  position: absolute;
+  inset: 74px 20px auto;
+  height: 276px;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(96, 130, 247, 0.08), rgba(226, 187, 255, 0.05) 55%, rgba(255, 255, 255, 0)),
+    repeating-linear-gradient(90deg, rgba(96, 130, 247, 0.08) 0 1px, transparent 1px 54px);
+  content: "";
+  pointer-events: none;
+}
+
+.workspace-dashboard-line-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .workspace-dashboard-line-chart {
   width: 100%;
-  height: 220px;
+  height: 260px;
+  flex: 0 0 auto;
   overflow: visible;
 }
 
@@ -1003,6 +1097,7 @@ onBeforeUnmount(() => {
 .workspace-dashboard-chart-caption {
   display: flex;
   justify-content: space-between;
+  margin-top: 8px;
   color: #666666;
   font-size: 12px;
 }
@@ -1030,6 +1125,72 @@ onBeforeUnmount(() => {
   padding: 10px;
   color: #333333;
   text-decoration: none;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* UI modification: 交易与收入/渠道明细指标卡 hover 补齐 #DBFFBA 渐变反馈。 */
+.workspace-dashboard-chart-metrics a:hover,
+.workspace-dashboard-channel-detail a:hover {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff);
+  box-shadow: 0 12px 24px rgba(96, 130, 247, 0.14);
+  color: #151921;
+  transform: translateY(-2px);
+}
+
+/* UI modification: 仅增强交易卡片内既有指标的视觉密度，不改变原有 href 与数据。 */
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics {
+  flex: 0 0 auto;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a {
+  min-height: 84px;
+  align-content: start;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 255, 0.94)),
+    #f8f9fc;
+  padding: 14px;
+  box-shadow: inset 0 0 0 1px rgba(96, 130, 247, 0.05);
+}
+
+/* UI modification: 修正交易与收入指标卡 hover 被基础样式覆盖的问题，保留原有链接。 */
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a:hover {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff) !important;
+  box-shadow: 0 12px 24px rgba(96, 130, 247, 0.14) !important;
+  color: #151921;
+  transform: translateY(-2px);
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a::after {
+  grid-column: 1 / -1;
+  height: 8px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, #6082f7 0 var(--workspace-metric-fill), #e9eefc var(--workspace-metric-fill) 100%);
+  content: "";
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a:nth-child(1) {
+  --workspace-metric-fill: 82%;
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a:nth-child(2) {
+  --workspace-metric-fill: 74%;
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a:nth-child(3) {
+  --workspace-metric-fill: 88%;
+}
+
+.workspace-dashboard-line-card .workspace-dashboard-chart-metrics a:nth-child(4) {
+  --workspace-metric-fill: 66%;
 }
 
 .workspace-dashboard-chart-metrics span,
@@ -1118,9 +1279,26 @@ onBeforeUnmount(() => {
   grid-template-columns: 12px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
+  border-radius: 8px;
   color: #333333;
   font-size: 13px;
+  margin: -6px;
+  padding: 6px;
   text-decoration: none;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* UI modification: 主要收入渠道图例入口 hover 补齐 #DBFFBA 渐变、上浮和阴影反馈。 */
+.workspace-dashboard-legend-row:hover {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff);
+  box-shadow: 0 10px 22px rgba(96, 130, 247, 0.14);
+  color: #151921;
+  transform: translateY(-2px);
 }
 
 .workspace-dashboard-legend-row i {
@@ -1200,14 +1378,38 @@ onBeforeUnmount(() => {
 .workspace-dashboard-panel-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.workspace-dashboard-overview-section {
+  padding: 24px;
+}
+
+.workspace-dashboard-overview-section :deep(.workspace-dashboard-card),
+.workspace-dashboard-overview-section .workspace-dashboard-support-card {
+  border: 1px solid #eef0f4 !important;
+  background: #fbfcff;
+  box-shadow: none;
+}
+
+.workspace-dashboard-overview-support {
+  border-top: 1px solid #eef0f4;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: 20px;
 }
 
 .workspace-dashboard-opportunity-grid,
 .workspace-dashboard-support-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+}
+
+.workspace-dashboard-opportunity-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workspace-dashboard-support-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .workspace-dashboard-message-list,
@@ -1223,8 +1425,26 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 12px;
+  border-radius: 8px;
   color: #333333;
+  padding: 8px;
+  margin: -8px;
   text-decoration: none;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* UI modification: 总览对话与任务行 hover 补齐 #DBFFBA 渐变、上浮和阴影反馈。 */
+.workspace-dashboard-message-row:hover,
+.workspace-dashboard-task-row:hover {
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.92), rgba(226, 187, 255, 0.24) 55%, #ffffff);
+  box-shadow: 0 12px 24px rgba(96, 130, 247, 0.14);
+  color: #151921;
+  transform: translateY(-2px);
 }
 
 .workspace-dashboard-message-row img {
@@ -1276,9 +1496,35 @@ onBeforeUnmount(() => {
   gap: 8px;
 }
 
+.workspace-dashboard-tabs button {
+  position: relative;
+  border-radius: 999px !important;
+  padding-inline: 10px !important;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+/* UI modification: 任务筛选选项卡悬浮反馈，使用 #DBFFBA 渐变并轻微上浮。 */
+.workspace-dashboard-tabs button:hover {
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(219, 255, 186, 0.95), rgba(226, 187, 255, 0.32)) !important;
+  box-shadow: 0 10px 22px rgba(96, 130, 247, 0.14);
+  color: #151921 !important;
+  transform: translateY(-2px);
+}
+
 .workspace-dashboard-tabs button[class*="bg-primary"] {
   background: #6082f7 !important;
   color: #fff !important;
+}
+
+.workspace-dashboard-tabs button[class*="bg-primary"]:hover {
+  background: linear-gradient(135deg, #6082f7, #dbffba) !important;
+  color: #151921 !important;
 }
 
 @media (max-width: 1280px) {
